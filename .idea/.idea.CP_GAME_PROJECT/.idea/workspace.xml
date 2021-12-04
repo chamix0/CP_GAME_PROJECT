@@ -2,7 +2,31 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="d4d320ca-14cb-44f5-82e9-b498f08c2bbc" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.CP_GAME_PROJECT/.idea/contentModel.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.CP_GAME_PROJECT/.idea/contentModel.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.CP_GAME_PROJECT/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.CP_GAME_PROJECT/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Intelligent Behaviours GUI Package/RedoSteps.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Intelligent Behaviours GUI Package/UndoSteps.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Intelligent Behaviours GUI Package/UndoSteps/current_step0.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Intelligent Behaviours GUI Package/UndoSteps/current_step0.xml.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Intelligent Behaviours GUI Package/UndoSteps/current_step1.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Intelligent Behaviours GUI Package/UndoSteps/current_step1.xml.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Intelligent Behaviours GUI Package/UndoSteps/current_step2.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Intelligent Behaviours GUI Package/UndoSteps/current_step2.xml.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Main Folder/Prefabs/explorable object (1).prefab" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Main Folder/Prefabs/explorable object (1).prefab.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Main Folder/Resources/Materials/New Material.mat" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Main Folder/Resources/Materials/New Material.mat.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Main Folder/Scripts/Behavoir explorer.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Main Folder/Scripts/Behavoir explorer/DefendfrommonsterBT.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Main Folder/Scripts/Behavoir explorer/DefendfrommonsterBT.cs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Main Folder/Scripts/CharacterController.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Main Folder/Scripts/CharacterController.cs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Main Folder/Scripts/ExplorableObject.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Main Folder/Scripts/ExplorableObject.cs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Main Folder/Scripts/PlayerInfo.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Main Folder/Scripts/PlayerInfo.cs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/ProjectSettings/TagManager.asset" beforeDir="false" afterPath="$PROJECT_DIR$/ProjectSettings/TagManager.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/UserSettings/EditorUserSettings.asset" beforeDir="false" afterPath="$PROJECT_DIR$/UserSettings/EditorUserSettings.asset" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -13,14 +37,24 @@
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="HighlightingSettingsPerFile">
-    <setting file="file://$PROJECT_DIR$/Assets/Main Folder/Scripts/CharacterController.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Assets/Main Folder/Scripts/ExplorableObject.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Assets/Main Folder/Scripts/PlayerInfo.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Main Folder/Scripts/Explorer/Behavoir explorer/DefendfrommonsterBT.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Main Folder/Scripts/World/ExplorableObject.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Main Folder/Scripts/World/WorldManager.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Main Folder/Scripts/Explorer/PlayerInfo.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/UserSettings/EditorUserSettings.asset" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Main Folder/Scripts/Explorer/Behavoir explorer/MainQuestFSM.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Main Folder/Scripts/Explorer/CharacterController.cs" root0="FORCE_HIGHLIGHTING" />
   </component>
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
         <option value="$PROJECT_DIR$/Assets/Main Folder/Scripts/CharacterController.cs" />
+        <option value="$PROJECT_DIR$/Assets/Main Folder/Scripts/Behavoir explorer/MainQuestFSM.cs" />
+        <option value="$PROJECT_DIR$/Assets/Main Folder/Scripts/ExplorableObject.cs" />
+        <option value="$PROJECT_DIR$/Assets/Main Folder/Scripts/World/WorldManager.cs" />
+        <option value="$PROJECT_DIR$/Assets/Main Folder/Scripts/World/ExplorableObject.cs" />
+        <option value="$PROJECT_DIR$/Assets/Main Folder/Scripts/Explorer/CharacterController.cs" />
+        <option value="$PROJECT_DIR$/Assets/Main Folder/Scripts/Explorer/Behavoir explorer/MainQuestFSM.cs" />
       </list>
     </option>
   </component>
@@ -72,7 +106,7 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1638641736205</updated>
-      <workItem from="1638641737920" duration="2464000" />
+      <workItem from="1638641737920" duration="9950000" />
     </task>
     <servers />
   </component>
@@ -91,5 +125,34 @@
         </entry>
       </map>
     </option>
+  </component>
+  <component name="WindowStateProjectService">
+    <state x="2026" y="53" width="1419" height="1026" key="dock-window-1" timestamp="1638654289935">
+      <screen x="1920" y="0" width="1920" height="1040" />
+    </state>
+    <state x="2026" y="53" width="1419" height="1026" key="dock-window-1/0.0.1920.1040/1920.0.1920.1040@0.0.1920.1040" timestamp="1638654289935" />
+    <state x="1988" y="0" width="1419" height="1026" key="dock-window-2" timestamp="1638657197051">
+      <screen x="1920" y="0" width="1920" height="1040" />
+    </state>
+    <state x="1988" y="0" width="1419" height="1026" key="dock-window-2/0.0.1920.1040/1920.0.1920.1040@0.0.1920.1040" timestamp="1638657197051" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="DotNet Breakpoints">
+          <url>file://$PROJECT_DIR$/Assets/Main Folder/Scripts/Explorer/CharacterController.cs</url>
+          <line>243</line>
+          <properties documentPath="$PROJECT_DIR$/Assets/Main Folder/Scripts/Explorer/CharacterController.cs" initialLine="245">
+            <startOffsets>
+              <option value="6296" />
+            </startOffsets>
+            <endOffsets>
+              <option value="6348" />
+            </endOffsets>
+          </properties>
+          <option name="timeStamp" value="1" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
 </project>
