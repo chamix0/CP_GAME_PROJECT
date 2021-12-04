@@ -20,7 +20,7 @@ public class CharacterController : MonoBehaviour
     public MyTimer exploreObjectTimer, updateWithBudTimer/*, 
         updateAnimationCooldownTimer*/;
     public float speed = 3;
-    public bool enabledMainQuest = false;
+    public bool enabledMainQuest = true;
 
     //private
     private float updatingCooldown = 20;

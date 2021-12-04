@@ -2,7 +2,10 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="d4d320ca-14cb-44f5-82e9-b498f08c2bbc" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/Logs/AssetImportWorker0.log" beforeDir="false" afterPath="$PROJECT_DIR$/Logs/AssetImportWorker0.log" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.CP_GAME_PROJECT/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.CP_GAME_PROJECT/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Main Folder/Prefabs/Explorer (1).prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Main Folder/Prefabs/Explorer (1).prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Main Folder/Scripts/CharacterController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Main Folder/Scripts/CharacterController.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ProjectSettings/Packages/com.unity.probuilder/Settings.json" beforeDir="false" afterPath="$PROJECT_DIR$/ProjectSettings/Packages/com.unity.probuilder/Settings.json" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -16,6 +19,13 @@
     <setting file="file://$PROJECT_DIR$/Assets/Main Folder/Scripts/CharacterController.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Main Folder/Scripts/ExplorableObject.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Main Folder/Scripts/PlayerInfo.cs" root0="FORCE_HIGHLIGHTING" />
+  </component>
+  <component name="IdeDocumentHistory">
+    <option name="CHANGED_PATHS">
+      <list>
+        <option value="$PROJECT_DIR$/Assets/Main Folder/Scripts/CharacterController.cs" />
+      </list>
+    </option>
   </component>
   <component name="ProjectId" id="21pd09erR689366TIilC7mvddbx" />
   <component name="ProjectViewState">
@@ -65,7 +75,7 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1638641736205</updated>
-      <workItem from="1638641737920" duration="456000" />
+      <workItem from="1638641737920" duration="778000" />
     </task>
     <servers />
   </component>

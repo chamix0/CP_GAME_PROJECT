@@ -324,7 +324,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _name: Explorator
   _monsterDetectionRange: 5
-  _budDetectionRange: 5
+  _budDetectionRange: 10
   exploringTimeForEachObject: 3
   updatingTimeForEachBud: 5
 --- !u!114 &3176626668363243714
@@ -344,7 +344,7 @@ MonoBehaviour:
   exploreObjectTimer: {fileID: 7726087859437722858}
   updateWithBudTimer: {fileID: 222688622397606119}
   speed: 2
-  enabledMainQuest: 0
+  enabledMainQuest: 1
 --- !u!114 &7726087859437722858
 MonoBehaviour:
   m_ObjectHideFlags: 0
