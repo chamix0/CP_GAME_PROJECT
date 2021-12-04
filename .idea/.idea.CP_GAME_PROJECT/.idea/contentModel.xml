@@ -154,7 +154,6 @@
           <e p="Scripts" t="Include">
             <e p="Behavoir explorer" t="Include">
               <e p="DefendfrommonsterBT.cs" t="Include" />
-              <e p="MainQuest.cs" t="Include" />
             </e>
             <e p="CharacterController.cs" t="Include" />
             <e p="ExplorableObject.cs" t="Include" />
