@@ -6,10 +6,10 @@ using System.Threading;
 using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.UI;
+
 /// <summary>
 /// this class function is to look for random places to explore and update info with other explorers
 /// </summary>
-
 public class CharacterController : MonoBehaviour
 {
     #region VARIABLES
@@ -17,19 +17,21 @@ public class CharacterController : MonoBehaviour
     //public
     public PlayerInfo PlayerInfo;
     public Text characterLabel;
-    public MyTimer exploreObjectTimer, updateWithBudTimer/*, 
+
+    public MyTimer exploreObjectTimer, updateWithBudTimer /*, 
         updateAnimationCooldownTimer*/;
+
     public float speed = 3;
     public bool enabledMainQuest = true;
 
     //private
-    private float updatingCooldown = 20;
+    // private float updatingCooldown = 20;
     private List<ExplorableObject> explorablePlaces;
     private List<ExplorableObject> exploredPlaces;
     private List<CharacterController> budsList;
     private Vector3 _currentDestination;
     private Vector3 _startingPosition;
-    private ExplorableObject currentTarget;
+    [NonSerialized] public ExplorableObject currentTarget;
     private NavMeshAgent agent;
 
     #endregion
@@ -37,13 +39,12 @@ public class CharacterController : MonoBehaviour
     void Start()
     {
         agent = GetComponent<NavMeshAgent>();
-        _currentDestination = this.transform.position;
+        _currentDestination = transform.position;
         _startingPosition = _currentDestination;
         currentTarget = null;
         characterLabel.text = PlayerInfo._name;
 
         budsList = new List<CharacterController>();
-        explorablePlaces = new List<ExplorableObject>();
         exploredPlaces = new List<ExplorableObject>();
 
 
@@ -52,87 +53,59 @@ public class CharacterController : MonoBehaviour
         //updateAnimationCooldownTimer.setTimer(updatingCooldown);
 
         setPlayers();
-        setExplorableObjects();
+        //setExplorableObjects();
         findRandomExplorablePlace();
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (enabledMainQuest)
-        {
-           mainQuest();  
-        }
-     
+        canContinue();
     }
 
     #region ACTIONS
 
     private void mainQuest()
-    {  //Debug.Log(distanceToCurrentDestination() + " " + explorablePlaces.Count);
+    {
+        //Debug.Log(distanceToCurrentDestination() + " " + explorablePlaces.Count);
         if (canContinue())
         {
             budOnRange();
             destinationStillIsUnexplored();
             if (placeExplored())
             {
-                changeToExplored(currentTarget);
+                changeToExplored();
                 currentTarget = null;
                 findRandomExplorablePlace();
             }
         }
-        
     }
 
-    private bool findRandomExplorablePlace()
+    public bool findRandomExplorablePlace()
     {
         System.Random rn = new System.Random();
-        if (explorablePlaces.Count > 0)
+        if (!currentTarget)
         {
-            ExplorableObject aux = explorablePlaces[rn.Next(explorablePlaces.Count - 1)];
-            setDestination(aux.getPosition());
-            currentTarget = aux;
-            return true;
-        }
-        else
-        {
-            currentTarget = null;
-            setDestination(_startingPosition);
-            return true;
-        }
-    }
-
-    private void findNearestExplorablePlace()
-    {
-    }
-
-    /*private void stopToShareInfo()
-    {
-        if (updateAnimationCooldownTimer.pausedTimer())
-        {
-            if (updateAnimationCooldownTimer.hasBeenUsed())
+            if (explorablePlaces.Count > 0)
             {
-                updateAnimationCooldownTimer.resetTimer();
-                updateAnimationCooldownTimer.start();
+                ExplorableObject aux = explorablePlaces[rn.Next(explorablePlaces.Count - 1)];
+                setDestination(aux.getPosition());
+                currentTarget = aux;
+                return true;
             }
             else
             {
-                updateAnimationCooldownTimer.start();
-            }
-
-            if (updateWithBudTimer.hasBeenUsed())
-            {
-                updateWithBudTimer.resetTimer();
-                updateWithBudTimer.start();
-            }
-            else
-            {
-                updateWithBudTimer.start();
+                currentTarget = null;
+                setDestination(_startingPosition);
+                return false;
             }
         }
-    }*/
 
-    private void stopToExploreAnObject()
+        return true;
+    }
+
+
+    public void stopToExploreAnObject()
     {
         if (currentTarget)
         {
@@ -172,14 +145,14 @@ public class CharacterController : MonoBehaviour
         agent.SetDestination(_currentDestination);
     }
 
-    public void changeToExplored(ExplorableObject explorableObject)
+    public void changeToExplored()
     {
-        if (explorableObject)
+        if (currentTarget)
         {
-            explorableObject.setExplored();
-            if (explorablePlaces.Remove(explorableObject))
+            currentTarget.setExplored();
+            if (explorablePlaces.Remove(currentTarget))
             {
-                exploredPlaces.Add(explorableObject);
+                exploredPlaces.Add(currentTarget);
             }
         }
     }
@@ -193,7 +166,8 @@ public class CharacterController : MonoBehaviour
     {
         foreach (CharacterController c in budsList)
         {
-            if (this != c && Vector3.Distance(this.transform.position, c.transform.position) < PlayerInfo._budDetectionRange)
+            if (this != c && Vector3.Distance(this.transform.position, c.transform.position) <
+                PlayerInfo._budDetectionRange)
             {
                 //stopToShareInfo();
                 //Debug.Log(Vector3.Distance(this.transform.position, c.transform.position));
@@ -207,6 +181,11 @@ public class CharacterController : MonoBehaviour
                 }
             }
         }
+    }
+
+    public void addObjects(ExplorableObject[] obj)
+    {
+        explorablePlaces.AddRange(obj);
     }
 
     /// <summary>
@@ -244,7 +223,7 @@ public class CharacterController : MonoBehaviour
         }
     }
 
-    public void setExplorableObjects()
+    /*public void setExplorableObjects()
     {
         GameObject[] aux;
         aux = GameObject.FindGameObjectsWithTag("Explorable");
@@ -252,7 +231,7 @@ public class CharacterController : MonoBehaviour
         {
             explorablePlaces.Add(g.GetComponent<ExplorableObject>());
         }
-    }
+    }*/
 
     public void setPlayers()
     {
