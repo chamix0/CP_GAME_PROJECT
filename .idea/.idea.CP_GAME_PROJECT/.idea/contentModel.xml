@@ -155,7 +155,7 @@
             <e p="Explorer" t="Include">
               <e p="Behavoir explorer" t="Include">
                 <e p="DefendfrommonsterBT.cs" t="Include" />
-                <e p="MainQuestFSM.cs" t="Include" />
+                <e p="MainQuestM.cs" t="Include" />
               </e>
               <e p="CharacterController.cs" t="Include" />
               <e p="PlayerInfo.cs" t="Include" />

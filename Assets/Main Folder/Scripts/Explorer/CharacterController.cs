@@ -10,6 +10,7 @@ using UnityEngine.UI;
 /// <summary>
 /// this class function is to look for random places to explore and update info with other explorers
 /// </summary>
+[DefaultExecutionOrder(-1)]
 public class CharacterController : MonoBehaviour
 {
     #region VARIABLES
@@ -17,44 +18,50 @@ public class CharacterController : MonoBehaviour
     //public
     public PlayerInfo PlayerInfo;
     public Text characterLabel;
-
-    public MyTimer exploreObjectTimer, updateWithBudTimer /*, 
-        updateAnimationCooldownTimer*/;
-
+    public MyTimer exploreObjectTimer, updateWithBudTimer;
+    public GameObject objectFound;
+    [NonSerialized] public Vector3 platformLocation;
     public float speed = 3;
-    public bool enabledMainQuest = true;
 
     //private
     // private float updatingCooldown = 20;
     private List<ExplorableObject> explorablePlaces;
     private List<ExplorableObject> exploredPlaces;
+    private List<ExplorableObject> containsAnObjectPlaces;
+
     private List<CharacterController> budsList;
     private Vector3 _currentDestination;
     private Vector3 _startingPosition;
     [NonSerialized] public ExplorableObject currentTarget;
     private NavMeshAgent agent;
+    [SerializeField]public WorldManager worldManager;
 
     #endregion
 
+    private void Awake()
+    {
+        budsList = new List<CharacterController>();
+        explorablePlaces = new List<ExplorableObject>();
+        exploredPlaces = new List<ExplorableObject>();
+        containsAnObjectPlaces = new List<ExplorableObject>();
+        agent = GetComponent<NavMeshAgent>();
+    }
+
     void Start()
     {
-        agent = GetComponent<NavMeshAgent>();
         _currentDestination = transform.position;
         _startingPosition = _currentDestination;
         currentTarget = null;
         characterLabel.text = PlayerInfo._name;
 
-        budsList = new List<CharacterController>();
-        exploredPlaces = new List<ExplorableObject>();
 
+        //object found disable
+        objectFound.GetComponent<MeshRenderer>().enabled = false;
 
         exploreObjectTimer.setTimer(PlayerInfo.exploringTimeForEachObject);
         updateWithBudTimer.setTimer(PlayerInfo.updatingTimeForEachBud);
         //updateAnimationCooldownTimer.setTimer(updatingCooldown);
-
         setPlayers();
-        //setExplorableObjects();
-        findRandomExplorablePlace();
     }
 
     // Update is called once per frame
@@ -65,20 +72,9 @@ public class CharacterController : MonoBehaviour
 
     #region ACTIONS
 
-    private void mainQuest()
+    public bool isMyObjectNeeded()
     {
-        //Debug.Log(distanceToCurrentDestination() + " " + explorablePlaces.Count);
-        if (canContinue())
-        {
-            budOnRange();
-            destinationStillIsUnexplored();
-            if (placeExplored())
-            {
-                changeToExplored();
-                currentTarget = null;
-                findRandomExplorablePlace();
-            }
-        }
+        return Equals(currentTarget.GetType(), worldManager.getCurrentTask());
     }
 
     public bool findRandomExplorablePlace()
@@ -89,14 +85,13 @@ public class CharacterController : MonoBehaviour
             if (explorablePlaces.Count > 0)
             {
                 ExplorableObject aux = explorablePlaces[rn.Next(explorablePlaces.Count - 1)];
-                setDestination(aux.getPosition());
-                currentTarget = aux;
+                setDestination(aux.getPosition(), aux);
                 return true;
             }
             else
             {
                 currentTarget = null;
-                setDestination(_startingPosition);
+                setDestination(_startingPosition, null);
                 return false;
             }
         }
@@ -121,9 +116,29 @@ public class CharacterController : MonoBehaviour
         }
     }
 
+    public void takeObjectToBombPlatform()
+    {
+        objectFound.GetComponent<MeshRenderer>().enabled = true;
+        setDestination(platformLocation);
+    }
+
     #endregion
 
     #region Methods
+
+    public void goToObjectIknow()
+    {
+        ExplorableObject aux = containsAnObjectPlaces.Find(
+            delegate(ExplorableObject bk) { return bk == worldManager.getCurrentTask(); }
+        );
+        Vector3 location = aux.transform.position;
+        setDestination(location, aux);
+    }
+
+    public bool iKnowWhereThatObjectIs()
+    {
+        return containsAnObjectPlaces.Contains(worldManager.getCurrentTask());
+    }
 
     private bool canContinue()
     {
@@ -139,10 +154,24 @@ public class CharacterController : MonoBehaviour
         }
     }
 
+    public void setDestination(Vector3 pos, ExplorableObject exp)
+    {
+        currentTarget = exp;
+        _currentDestination = pos;
+        agent.SetDestination(_currentDestination);
+    }
+
     public void setDestination(Vector3 pos)
     {
         _currentDestination = pos;
         agent.SetDestination(_currentDestination);
+    }
+
+    public void addObjectTocontainsAnObjectList()
+    {
+        containsAnObjectPlaces.Add(currentTarget);
+        explorablePlaces.Remove(currentTarget);
+        currentTarget = null;
     }
 
     public void changeToExplored()
@@ -154,6 +183,7 @@ public class CharacterController : MonoBehaviour
             {
                 exploredPlaces.Add(currentTarget);
             }
+            currentTarget = null;
         }
     }
 
@@ -196,18 +226,16 @@ public class CharacterController : MonoBehaviour
         if (exploredPlaces.Contains(currentTarget))
         {
             agent.speed = speed;
-            setDestination(transform.position);
-            currentTarget = null;
+            setDestination(transform.position, null);
         }
     }
 
     public bool destinationReached()
     {
-        bool aux = distanceToCurrentDestination() < 1;
-        return aux;
+        return distanceToCurrentDestination() < 1;
     }
 
-    private bool placeExplored()
+    public bool placeExplored()
     {
         if (destinationReached())
         {
@@ -222,16 +250,6 @@ public class CharacterController : MonoBehaviour
             return false;
         }
     }
-
-    /*public void setExplorableObjects()
-    {
-        GameObject[] aux;
-        aux = GameObject.FindGameObjectsWithTag("Explorable");
-        foreach (GameObject g in aux)
-        {
-            explorablePlaces.Add(g.GetComponent<ExplorableObject>());
-        }
-    }*/
 
     public void setPlayers()
     {
