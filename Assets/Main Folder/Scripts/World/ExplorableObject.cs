@@ -7,6 +7,7 @@ public class ExplorableObject : MonoBehaviour
     public Material matC, matNoC;
     private bool explored = false;
     private bool containsOnject;
+    private WorldManager.ObjectTypes type;
 
 
     public Vector3 getPosition()
@@ -24,6 +25,15 @@ public class ExplorableObject : MonoBehaviour
         containsOnject = contains;
     }
 
+    public void setType(WorldManager.ObjectTypes type)
+    {
+        this.type = type;
+    }
+
+    public WorldManager.ObjectTypes getType()
+    {
+        return type;
+    }
     public void setExplored()
     {
         explored = true;

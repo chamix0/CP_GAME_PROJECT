@@ -11,6 +11,8 @@ TagManager:
   - LibraryExplorable
   - RoomExplorable
   - BathExplorable
+  - world manager
+  - book
   layers:
   - Default
   - TransparentFX
