@@ -4,97 +4,94 @@ using UnityEngine;
 
 public class MyTimer : MonoBehaviour
 {
-    
-        private float timer;
-        private float timeContdown = 30;
-        private float end;
-        private bool paused;
-        private bool finished = false;
-        private bool used;
+    private float timer;
+    private float timeContdown = 30;
+    private float end;
+    private bool paused;
+    private bool finished = false;
+    private bool used;
 
-        private void Start()
-        {
-            timer = timeContdown;
-            paused = true;
-            used = false;
-        }
+    private void Start()
+    {
+        timer = timeContdown;
+        paused = true;
+        used = false;
+    }
 
-        private void FixedUpdate()
+    private void FixedUpdate()
+    {
+        if (!paused)
         {
-            if (!paused)
+            if (timer <= 0 || finished)
             {
-                if (timer <= 0 || finished)
-                {
-                    paused = true;
-                    finished = true;
-                }
-                else
-                {
-                    Debug.Log(timer);
-                    timer -= UnityEngine.Time.deltaTime;
-                }
+                paused = true;
+                finished = true;
+            }
+            else
+            {
+                timer -= UnityEngine.Time.deltaTime;
             }
         }
+    }
 
-        public void setTimer(float limit)
-        {
-            timeContdown = limit;
-        }
+    public void setTimer(float limit)
+    {
+        timeContdown = limit;
+    }
 
-        public void start()
-        {
-            timer = timeContdown;
-            used = true;
-            paused = false;
-            finished = false;
-        }
+    public void start()
+    {
+        timer = timeContdown;
+        used = true;
+        paused = false;
+        finished = false;
+    }
 
-        public bool hasBeenUsed()
-        {
-            return used;
-        }
+    public bool hasBeenUsed()
+    {
+        return used;
+    }
 
-        public void finish()
-        {
-            paused = true;
-            finished = true;
-        }
+    public void finish()
+    {
+        paused = true;
+        finished = true;
+    }
 
-        public bool finishedTimer()
-        {
-            return finished;
-        }
+    public bool finishedTimer()
+    {
+        return finished;
+    }
 
-        public bool pausedTimer()
-        {
-            return paused;
-        }
+    public bool pausedTimer()
+    {
+        return paused;
+    }
 
-        public float getElapsedTime()
-        {
-            return timeContdown - timer;
-        }
+    public float getElapsedTime()
+    {
+        return timeContdown - timer;
+    }
 
-        public float getTimeToFinish()
-        {
-            return timer;
-        }
-        
-        public void resetTimer()
-        {
-            timer = timeContdown;
-            paused = true;
-            finished = false;
-        }
+    public float getTimeToFinish()
+    {
+        return timer;
+    }
 
-        public void pauseTimer()
-        {
-            paused = true;
-        }
+    public void resetTimer()
+    {
+        timer = timeContdown;
+        paused = true;
+        finished = false;
+    }
 
-        public void continueTimer()
-        {
-            paused = false;
-        }
+    public void pauseTimer()
+    {
+        paused = true;
+    }
 
+    public void continueTimer()
+    {
+        paused = false;
+    }
 }

@@ -1,9 +1,7 @@
-using System;
-using System.Collections;
 using System.Collections.Generic;
-using System.Collections.Specialized;
 using System.Linq;
 using UnityEngine;
+using UnityEngine.UI;
 using Random = System.Random;
 
 public class WorldManager : MonoBehaviour
@@ -39,6 +37,8 @@ public class WorldManager : MonoBehaviour
     //patform where the bomb goes
     public GameObject platform;
 
+    public Text tasks;
+
     //players
     private List<CharacterController> characters;
     private List<ExplorableObject> neededObjects;
@@ -47,6 +47,7 @@ public class WorldManager : MonoBehaviour
 
     void Awake()
     {
+        UnityEngine.Random.InitState((int) System.DateTime.Now.Ticks);
         phase = 0;
         allObjects = new List<ExplorableObject>();
         livingRoomObjects = new List<ExplorableObject>();
@@ -68,80 +69,83 @@ public class WorldManager : MonoBehaviour
 
     private void Start()
     {
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
+        printTasks();
     }
 
     public void advanceOnTask()
     {
         phase++;
+        printTasks();
+    }
+
+    public ExplorableObject getBook()
+    {
+        return book;
+    }
+
+    public void printTasks()
+    {
+        string tas;
+        tas = "" + getCurrentTask().getType() + "\n";
+        tas += "-------\n";
+        for (int i = 0; i < neededObjects.Count; i++)
+        {
+            tas += "\n" + neededObjects[i].getType();
+        }
+
+        tasks.text = "\n" + tas;
     }
 
     public ExplorableObject getCurrentTask()
     {
-        if (phase == 0)
-        {
-            return book;
-        }
-        else if (phase == 4)
-        {
-            return graveYardItem;
-        }
-        else
-        {
-            return neededObjects[phase];
-        }
+        return neededObjects[phase % neededObjects.Count];
     }
 
 
     public void setNeededObjects()
     {
-        System.Random rn = new System.Random();
-
         //shuffle
-        neededObjects.OrderBy(a => rn.Next());
+        neededObjects.Sort((a,b)=>1-2*UnityEngine.Random.Range(0,5));
+        
 
-        for (int i = 0; i < 2; i++)
-        {
-            neededObjects.RemoveAt(rn.Next(neededObjects.Count - 1));
-        }
+        List<ExplorableObject> aux = new List<ExplorableObject>();
+        aux.Add(book);
+        aux.AddRange(neededObjects);
+        aux.Add(graveYardItem);
+        neededObjects = aux;
     }
 
     private void shuffleItems()
     {
-        System.Random rn = new System.Random();
-        int i = rn.Next(livingRoomObjects.Count - 1);
+        int i = UnityEngine.Random.Range(0, livingRoomObjects.Count - 1);
         livingRoomObjects[i].setContainsObject(true);
         livingRoomObjects[i].setType(ObjectTypes.LIVINGROOM);
         neededObjects.Add(livingRoomObjects[i]);
 
-        i = rn.Next(roomObjects.Count - 1);
+        i = UnityEngine.Random.Range(0, roomObjects.Count - 1);
         roomObjects[i].setContainsObject(true);
         roomObjects[i].setType(ObjectTypes.ROOM);
         neededObjects.Add(roomObjects[i]);
 
 
-        i = rn.Next(kitchenObjects.Count - 1);
+        i = UnityEngine.Random.Range(0, kitchenObjects.Count - 1);
         kitchenObjects[i].setContainsObject(true);
         kitchenObjects[i].setType(ObjectTypes.KITCHEN);
         neededObjects.Add(kitchenObjects[i]);
 
 
-        i = rn.Next(libraryObjects.Count - 1);
+        i = UnityEngine.Random.Range(0, libraryObjects.Count - 1);
         libraryObjects[i].setContainsObject(true);
         libraryObjects[i].setType(ObjectTypes.LIBRARY);
         neededObjects.Add(libraryObjects[i]);
 
 
-        i = rn.Next(bathObjects.Count - 1);
+        i = UnityEngine.Random.Range(0, bathObjects.Count - 1);
         bathObjects[i].setContainsObject(true);
         bathObjects[i].setType(ObjectTypes.BATH);
         neededObjects.Add(bathObjects[i]);
 
-        i = rn.Next(graveYardObjects.Count - 1);
+        i = UnityEngine.Random.Range(0, graveYardObjects.Count - 1);
         graveYardObjects[i].setContainsObject(true);
         graveYardObjects[i].setType(ObjectTypes.GRAVEYARD);
         graveYardItem = graveYardObjects[i];
@@ -152,14 +156,12 @@ public class WorldManager : MonoBehaviour
         foreach (CharacterController c in characters)
         {
             c.addObjects(allObjects.ToArray());
-            c.platformLocation = getPlatformPosition();
         }
     }
 
     private void chooseBookLocation()
     {
-        Random rn = new Random();
-        int aux = rn.Next(booksPlaceHolders.Count - 1);
+        int aux = UnityEngine.Random.Range(0,booksPlaceHolders.Count-1);
         for (int i = 0; i < booksPlaceHolders.Count; i++)
         {
             if (i == aux)
@@ -168,9 +170,11 @@ public class WorldManager : MonoBehaviour
                 book.setType(ObjectTypes.BOOK);
                 book.setContainsObject(true);
                 allObjects.Add(book);
-                break;
             }
-            Destroy(booksPlaceHolders[i]);
+            else
+            {
+                Destroy(booksPlaceHolders[i]);
+            }
         }
     }
 

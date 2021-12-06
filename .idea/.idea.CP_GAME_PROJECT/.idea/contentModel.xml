@@ -152,6 +152,9 @@
             </e>
           </e>
           <e p="Scripts" t="Include">
+            <e p="camera" t="Include">
+              <e p="followPlayer.cs" t="Include" />
+            </e>
             <e p="Explorer" t="Include">
               <e p="Behavoir explorer" t="Include">
                 <e p="DefendfrommonsterBT.cs" t="Include" />

@@ -38,6 +38,7 @@ public class MainQuestM : MonoBehaviour
     //Place your variables here
     private CharacterController mainCharacter;
     private String transition;
+
     #endregion variables
 
     // Start is called before the first frame update
@@ -125,43 +126,43 @@ public class MainQuestM : MonoBehaviour
         Debug.Log("looking for an object", this);
         if (mainCharacter.iKnowWhereThatObjectIs())
         {
+            Debug.Log("i know where that object is!!!", this);
             mainCharacter.goToObjectIknow();
-            mainCharacter.placeExplored();
+            mainCharacter.actionManagerTextTime();
             if (mainCharacter.destinationReached())
             {
-                if (mainCharacter.currentTarget.getContainsObject())
-                {
-                    Debug.Log("object found", this);
-                    transition = "There is object";
-                }
+                Debug.Log("object found", this);
+                transition = "there is object";
+            }
+            else
+            {
+                Debug.Log("destination not reached", this);
+                transition = "keep exploring";
             }
         }
         else
         {
             if (mainCharacter.findRandomExplorablePlace())
             {
-                mainCharacter.placeExplored();
+                mainCharacter.actionManagerTextTime();
                 if (mainCharacter.destinationReached())
                 {
                     if (mainCharacter.currentTarget.getContainsObject())
                     {
-                        Debug.Log("object found", this);
-                        transition = "There is object";
+                        Debug.Log("object found!!!!", this);
+                        transition = "there is object";
                     }
                     else
                     {
-                        Debug.Log("keep exploring", this);
+                        Debug.Log("this place doesnt contain anything", this);
                         mainCharacter.changeToExplored();
                         transition = "keep exploring";
-
                     }
                 }
                 else
                 {
-                    Debug.Log("keep exploring", this);
+                    Debug.Log("destination not reached", this);
                     transition = "keep exploring";
-
-                    
                 }
             }
             else
@@ -176,35 +177,44 @@ public class MainQuestM : MonoBehaviour
     {
         if (mainCharacter.isMyObjectNeeded())
         {
+            Debug.Log("I need this object", this);
             mainCharacter.worldManager.advanceOnTask();
+            mainCharacter.changeToExplored();
             transition = "object needed";
         }
         else
         {
+            Debug.Log("I dont need this object", this);
             transition = "object not needed";
         }
     }
 
     private void takeobjecttotheplaceAction()
     {
+        Debug.Log("taking this object to the platform", this);
+
         mainCharacter.takeObjectToBombPlatform();
         if (mainCharacter.destinationReached())
         {
-            mainCharacter.changeToExplored();
+            Debug.Log("platform reached", this);
+            mainCharacter.actionManagerTextTime();
             mainCharacter.objectFound.GetComponent<MeshRenderer>().enabled = false;
-            transition = "go back to explore";
+            transition = "back to explore";
         }
         else
         {
-            transition = "Item not placed";
+            Debug.Log("platfrom not reached", this);
+            transition = "item not placed";
         }
     }
 
     private void leaveobjectAction()
     {
-        mainCharacter.placeExplored();
+        Debug.Log("I might need this object later", this);
+        mainCharacter.actionManagerTextTime();
         mainCharacter.addObjectTocontainsAnObjectList();
         mainCharacter.changeToExplored();
+        transition = "go back to explore";
     }
 
     private void checkonbudAction()
