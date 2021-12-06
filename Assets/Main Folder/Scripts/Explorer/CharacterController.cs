@@ -1,8 +1,5 @@
-using System.Collections;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Threading;
 using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.UI;
@@ -20,7 +17,6 @@ public class CharacterController : MonoBehaviour
     public Text characterLabel;
     public MyTimer exploreObjectTimer, updateWithBudTimer;
     public GameObject objectFound;
-    [NonSerialized] public Vector3 platformLocation;
     public float speed = 3;
 
     //private
@@ -34,12 +30,13 @@ public class CharacterController : MonoBehaviour
     private Vector3 _startingPosition;
     [NonSerialized] public ExplorableObject currentTarget;
     private NavMeshAgent agent;
-    [SerializeField]public WorldManager worldManager;
+    [SerializeField] public WorldManager worldManager;
 
     #endregion
 
     private void Awake()
     {
+        UnityEngine.Random.InitState((int) System.DateTime.Now.Ticks);
         budsList = new List<CharacterController>();
         explorablePlaces = new List<ExplorableObject>();
         exploredPlaces = new List<ExplorableObject>();
@@ -74,7 +71,7 @@ public class CharacterController : MonoBehaviour
 
     public bool isMyObjectNeeded()
     {
-        return Equals(currentTarget.GetType(), worldManager.getCurrentTask());
+        return Equals(currentTarget, worldManager.getCurrentTask());
     }
 
     public bool findRandomExplorablePlace()
@@ -82,18 +79,22 @@ public class CharacterController : MonoBehaviour
         System.Random rn = new System.Random();
         if (!currentTarget)
         {
+            if (explorablePlaces.Contains(worldManager.getBook()))
+            {
+                setDestination(worldManager.getBook().getPosition(), worldManager.getBook());
+                return true;
+            }
+
             if (explorablePlaces.Count > 0)
             {
                 ExplorableObject aux = explorablePlaces[rn.Next(explorablePlaces.Count - 1)];
                 setDestination(aux.getPosition(), aux);
                 return true;
             }
-            else
-            {
-                currentTarget = null;
-                setDestination(_startingPosition, null);
-                return false;
-            }
+
+            currentTarget = null;
+            setDestination(_startingPosition, null);
+            return false;
         }
 
         return true;
@@ -102,24 +103,21 @@ public class CharacterController : MonoBehaviour
 
     public void stopToExploreAnObject()
     {
-        if (currentTarget)
+        if (exploreObjectTimer.hasBeenUsed())
         {
-            if (exploreObjectTimer.hasBeenUsed())
-            {
-                exploreObjectTimer.resetTimer();
-                exploreObjectTimer.start();
-            }
-            else
-            {
-                exploreObjectTimer.start();
-            }
+            exploreObjectTimer.resetTimer();
+            exploreObjectTimer.start();
+        }
+        else
+        {
+            exploreObjectTimer.start();
         }
     }
 
     public void takeObjectToBombPlatform()
     {
+        setDestination(worldManager.getPlatformPosition());
         objectFound.GetComponent<MeshRenderer>().enabled = true;
-        setDestination(platformLocation);
     }
 
     #endregion
@@ -128,11 +126,8 @@ public class CharacterController : MonoBehaviour
 
     public void goToObjectIknow()
     {
-        ExplorableObject aux = containsAnObjectPlaces.Find(
-            delegate(ExplorableObject bk) { return bk == worldManager.getCurrentTask(); }
-        );
-        Vector3 location = aux.transform.position;
-        setDestination(location, aux);
+        Vector3 location = worldManager.getCurrentTask().transform.position;
+        setDestination(location, worldManager.getCurrentTask());
     }
 
     public bool iKnowWhereThatObjectIs()
@@ -144,11 +139,13 @@ public class CharacterController : MonoBehaviour
     {
         if (exploreObjectTimer.pausedTimer() /*|| updateWithBudTimer.pausedTimer()*/)
         {
+            characterLabel.text = "Going to my target...";
             agent.speed = speed;
             return true;
         }
         else
         {
+            characterLabel.text = "Exploring...";
             agent.speed = 0;
             return false;
         }
@@ -179,16 +176,15 @@ public class CharacterController : MonoBehaviour
         if (currentTarget)
         {
             currentTarget.setExplored();
-            if (explorablePlaces.Remove(currentTarget))
-            {
-                exploredPlaces.Add(currentTarget);
-            }
+            explorablePlaces.Remove(currentTarget);
+            exploredPlaces.Add(currentTarget);
             currentTarget = null;
         }
     }
 
     public float distanceToCurrentDestination()
     {
+        //Debug.Log(Vector3.Distance(transform.position, _currentDestination));
         return Vector3.Distance(transform.position, _currentDestination);
     }
 
@@ -200,7 +196,6 @@ public class CharacterController : MonoBehaviour
                 PlayerInfo._budDetectionRange)
             {
                 //stopToShareInfo();
-                //Debug.Log(Vector3.Distance(this.transform.position, c.transform.position));
                 foreach (var explored in c.exploredPlaces)
                 {
                     if (!exploredPlaces.Contains(explored))
@@ -235,20 +230,16 @@ public class CharacterController : MonoBehaviour
         return distanceToCurrentDestination() < 1;
     }
 
-    public bool placeExplored()
+    public bool actionManagerTextTime()
     {
         if (destinationReached())
         {
-            characterLabel.text = "Exploring...";
-            canContinue();
             stopToExploreAnObject();
+            canContinue();
             return true;
         }
-        else
-        {
-            characterLabel.text = "Going to my target...";
-            return false;
-        }
+
+        return false;
     }
 
     public void setPlayers()
