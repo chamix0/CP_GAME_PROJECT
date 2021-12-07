@@ -5,7 +5,6 @@ using UnityEngine;
 public class ExplorableObject : MonoBehaviour
 {
     public Material matC, matNoC;
-    private bool explored = false;
     private bool containsOnject;
     private WorldManager.ObjectTypes type;
 
@@ -34,12 +33,13 @@ public class ExplorableObject : MonoBehaviour
     {
         return type;
     }
+
     public void setExplored()
     {
-        explored = true;
         if (containsOnject)
         {
             GetComponentInChildren<MeshRenderer>().material = matC;
+            containsOnject = false;
         }
         else
         {
