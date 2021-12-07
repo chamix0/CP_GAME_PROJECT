@@ -160,8 +160,10 @@
               <e p="Behavoir explorer" t="Include">
                 <e p="DefendfrommonsterBT.cs" t="Include" />
                 <e p="MainQuestM.cs" t="Include" />
+                <e p="RootIAManagerFSM.cs" t="Include" />
               </e>
               <e p="CharacterManager.cs" t="Include" />
+              <e p="LightManager.cs" t="Include" />
               <e p="PlayerInfo.cs" t="Include" />
             </e>
             <e p="Ghost FSM" t="Include">
@@ -173,6 +175,7 @@
               <e p="TextFollowPlayer.cs" t="Include" />
             </e>
             <e p="World" t="Include">
+              <e p="chargingPoint.cs" t="Include" />
               <e p="ExplorableObject.cs" t="Include" />
               <e p="WorldManager.cs" t="Include" />
             </e>

@@ -44,6 +44,7 @@ public class WorldManager : MonoBehaviour
     //players
     private List<CharacterManager> characters;
     private List<ExplorableObject> neededObjects;
+    private List<chargingPoint> chargingPoints;
 
     #endregion
 
@@ -61,6 +62,8 @@ public class WorldManager : MonoBehaviour
         booksPlaceHolders = new List<GameObject>();
         neededObjects = new List<ExplorableObject>();
         characters = new List<CharacterManager>();
+        chargingPoints=new List<chargingPoint>();
+        setChargingPoints();
         setExplorableObjects();
         chooseBookLocation();
         shuffleItems();
@@ -175,6 +178,22 @@ public class WorldManager : MonoBehaviour
         }
     }
 
+    public chargingPoint getNearestChargingPoint(Vector3 charPosition)
+    {
+        chargingPoint aux = chargingPoints[0];
+        float min = float.PositiveInfinity;
+        for (int i = 0; i < chargingPoints.Count; i++)
+        {
+            if (!chargingPoints[i].isBeingUsed())
+            {
+                aux = Vector3.Distance(chargingPoints[i].transform.position, charPosition) < min
+                    ? chargingPoints[i]
+                    : aux;
+            }
+        }
+        return aux;
+    }
+
     private void chooseBookLocation()
     {
         int aux = UnityEngine.Random.Range(0, booksPlaceHolders.Count - 1);
@@ -261,6 +280,17 @@ public class WorldManager : MonoBehaviour
         foreach (GameObject g in aux)
         {
             characters.Add(g.GetComponent<CharacterManager>());
+        }
+    }
+
+    private void setChargingPoints()
+    {
+        GameObject[] aux;
+        aux = GameObject.FindGameObjectsWithTag("charging point");
+
+        foreach (GameObject g in aux)
+        {
+            chargingPoints.Add(g.GetComponent<chargingPoint>());
         }
     }
 

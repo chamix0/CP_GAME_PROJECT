@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine.Assertions.Comparers;
 using UnityEngine.UI;
 
 /// <summary>
@@ -30,8 +31,10 @@ public class CharacterManager : MonoBehaviour
     private Vector3 waitingPosition;
     [NonSerialized] public ExplorableObject currentTarget;
     private NavMeshAgent agent;
+    private Vector3 destinationBuffer;
     [SerializeField] private GameObject waitingPositionObject;
     [SerializeField] public WorldManager worldManager;
+    [SerializeField] private LightManager lightManager;
 
     #endregion
 
@@ -73,6 +76,22 @@ public class CharacterManager : MonoBehaviour
     public void goToWaitingPoint()
     {
         setDestination(waitingPosition, null);
+    }
+
+    public void goToRechargePoint()
+    {
+        destinationBuffer = _currentDestination;
+        setDestination(worldManager.getNearestChargingPoint(this.transform.position).transform.position);
+    }
+
+    public void restoreDestination()
+    {
+        setDestination(destinationBuffer);
+    }
+
+    public void rechargeBattery()
+    {
+        lightManager.chargeBattery();
     }
 
     public bool isMyObjectNeeded()
@@ -223,15 +242,12 @@ public class CharacterManager : MonoBehaviour
 
                 foreach (var knownPlace in c.containsAnObjectPlaces)
                 {
-
                     if (!containsAnObjectPlaces.Contains(knownPlace))
                     {
                         containsAnObjectPlaces.Add(knownPlace);
                     }
                 }
-
             }
-
         }
 
         return false;

@@ -12,7 +12,9 @@ public class PlayerInfo : MonoBehaviour
     public float _budDetectionRange = 5;
     public float exploringTimeForEachObject = 3;
     public float updatingTimeForEachBud = 5;
+    public float batteryCapacity = 100;
     private Vector3 _startingPoint;
+    [NonSerialized] public bool needsToRecharge=false; 
 
     #endregion
 

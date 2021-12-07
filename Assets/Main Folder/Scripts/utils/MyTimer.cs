@@ -34,6 +34,11 @@ public class MyTimer : MonoBehaviour
         }
     }
 
+    public void takeTime(float n)
+    {
+        timer = timer - n < 0 ? 0 : timer - n;
+    }
+
     public void setTimer(float limit)
     {
         timeContdown = limit;
