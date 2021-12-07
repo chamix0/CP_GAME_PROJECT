@@ -28,6 +28,8 @@ public class WorldManager : MonoBehaviour
     private List<ExplorableObject> kitchenObjects;
     private List<ExplorableObject> libraryObjects;
     private List<ExplorableObject> bathObjects;
+    private bool allItemsFound = false;
+    private bool exploted = false;
 
     private ExplorableObject book;
     private ExplorableObject graveYardItem;
@@ -40,7 +42,7 @@ public class WorldManager : MonoBehaviour
     public Text tasks;
 
     //players
-    private List<CharacterController> characters;
+    private List<CharacterManager> characters;
     private List<ExplorableObject> neededObjects;
 
     #endregion
@@ -58,7 +60,7 @@ public class WorldManager : MonoBehaviour
         bathObjects = new List<ExplorableObject>();
         booksPlaceHolders = new List<GameObject>();
         neededObjects = new List<ExplorableObject>();
-        characters = new List<CharacterController>();
+        characters = new List<CharacterManager>();
         setExplorableObjects();
         chooseBookLocation();
         shuffleItems();
@@ -75,7 +77,17 @@ public class WorldManager : MonoBehaviour
     public void advanceOnTask()
     {
         phase++;
+        if (phase > 6)
+        {
+            allItemsFound = true;
+        }
+
         printTasks();
+    }
+
+    public bool getAllItemsFound()
+    {
+        return allItemsFound;
     }
 
     public ExplorableObject getBook()
@@ -101,12 +113,16 @@ public class WorldManager : MonoBehaviour
         return neededObjects[phase % neededObjects.Count];
     }
 
+    public bool getExploted()
+    {
+        return exploted;
+    }
 
     public void setNeededObjects()
     {
         //shuffle
-        neededObjects.Sort((a,b)=>1-2*UnityEngine.Random.Range(0,5));
-        
+        neededObjects.Sort((a, b) => 1 - 2 * UnityEngine.Random.Range(0, 5));
+
 
         List<ExplorableObject> aux = new List<ExplorableObject>();
         aux.Add(book);
@@ -153,7 +169,7 @@ public class WorldManager : MonoBehaviour
 
     private void pushInfoToPlayers()
     {
-        foreach (CharacterController c in characters)
+        foreach (CharacterManager c in characters)
         {
             c.addObjects(allObjects.ToArray());
         }
@@ -161,7 +177,7 @@ public class WorldManager : MonoBehaviour
 
     private void chooseBookLocation()
     {
-        int aux = UnityEngine.Random.Range(0,booksPlaceHolders.Count-1);
+        int aux = UnityEngine.Random.Range(0, booksPlaceHolders.Count - 1);
         for (int i = 0; i < booksPlaceHolders.Count; i++)
         {
             if (i == aux)
@@ -244,7 +260,7 @@ public class WorldManager : MonoBehaviour
 
         foreach (GameObject g in aux)
         {
-            characters.Add(g.GetComponent<CharacterController>());
+            characters.Add(g.GetComponent<CharacterManager>());
         }
     }
 
