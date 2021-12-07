@@ -25,17 +25,18 @@ public class MainQuestM : MonoBehaviour
     private PushPerception QuestfinishedPerception;
     private PushPerception keepexploringPerception;
     private PushPerception itemnotplacedPerception;
-    private PushPerception waitingfPerception;
     private State lookingforanobject;
     private State objectfound;
     private State takeobjecttotheplace;
     private State leaveobject;
+    private State checkonbud;
     private State reanimate;
+    private State updateinfo;
     private State waitforthedoortoopen;
     private State waiting;
 
     //Place your variables here
-    private CharacterManager mainCharacter;
+    private CharacterController mainCharacter;
     private String transition;
 
     #endregion variables
@@ -46,7 +47,7 @@ public class MainQuestM : MonoBehaviour
     private void Start()
     {
         MainQuestFSM_FSM = new StateMachineEngine(false);
-        mainCharacter = GetComponent<CharacterManager>();
+        mainCharacter = GetComponent<CharacterController>();
         transition = "";
         CreateStateMachine();
     }
@@ -71,14 +72,15 @@ public class MainQuestM : MonoBehaviour
         QuestfinishedPerception = MainQuestFSM_FSM.CreatePerception<PushPerception>();
         keepexploringPerception = MainQuestFSM_FSM.CreatePerception<PushPerception>();
         itemnotplacedPerception = MainQuestFSM_FSM.CreatePerception<PushPerception>();
-        waitingfPerception = MainQuestFSM_FSM.CreatePerception<PushPerception>();
 
         // States
         lookingforanobject = MainQuestFSM_FSM.CreateEntryState("Looking for an object", lookingforanobjectAction);
         objectfound = MainQuestFSM_FSM.CreateState("Object found", objectfoundAction);
         takeobjecttotheplace = MainQuestFSM_FSM.CreateState("Take object to the place", takeobjecttotheplaceAction);
         leaveobject = MainQuestFSM_FSM.CreateState("Leave object", leaveobjectAction);
+        checkonbud = MainQuestFSM_FSM.CreateState("Check on bud", checkonbudAction);
         reanimate = MainQuestFSM_FSM.CreateState("Reanimate", reanimateAction);
+        updateinfo = MainQuestFSM_FSM.CreateState("Update info", updateinfoAction);
         waitforthedoortoopen = MainQuestFSM_FSM.CreateState("Wait for the door to open", waitforthedoortoopenAction);
         waiting = MainQuestFSM_FSM.CreateState("Waiting", waitingAction);
 
@@ -90,17 +92,18 @@ public class MainQuestM : MonoBehaviour
             lookingforanobject);
         MainQuestFSM_FSM.CreateTransition("back to explore", takeobjecttotheplace, backtoexplorePerception,
             lookingforanobject);
-        MainQuestFSM_FSM.CreateTransition("bud is dead", lookingforanobject, budisdeadPerception, reanimate);
-        MainQuestFSM_FSM.CreateTransition("bud reanimated", reanimate, budreanimatedPerception, lookingforanobject);
+        MainQuestFSM_FSM.CreateTransition("bud on range", lookingforanobject, budonrangePerception, checkonbud);
+        MainQuestFSM_FSM.CreateTransition("bud is dead", checkonbud, budisdeadPerception, reanimate);
+        MainQuestFSM_FSM.CreateTransition("bud is ok", checkonbud, budisokPerception, updateinfo);
+        MainQuestFSM_FSM.CreateTransition("bud reanimated", reanimate, budreanimatedPerception, updateinfo);
+        MainQuestFSM_FSM.CreateTransition("bac to explore", updateinfo, bactoexplorePerception, lookingforanobject);
         MainQuestFSM_FSM.CreateTransition("no more places to look", lookingforanobject, nomoreplacestolookPerception,
             waiting);
-        MainQuestFSM_FSM.CreateTransition("more places to look", waiting, MoreplacestolookPerception,
+        MainQuestFSM_FSM.CreateTransition("More places to look", waiting, MoreplacestolookPerception,
             lookingforanobject);
         MainQuestFSM_FSM.CreateTransition("quest finished", waiting, QuestfinishedPerception, waitforthedoortoopen);
         MainQuestFSM_FSM.CreateTransition("keep exploring", lookingforanobject, keepexploringPerception,
             lookingforanobject);
-        MainQuestFSM_FSM.CreateTransition("keep waiting", waiting, waitingfPerception,
-            waiting);
         MainQuestFSM_FSM.CreateTransition("item not placed", takeobjecttotheplace, itemnotplacedPerception,
             takeobjecttotheplace);
 
@@ -120,62 +123,46 @@ public class MainQuestM : MonoBehaviour
 
     private void lookingforanobjectAction()
     {
-        if (mainCharacter.checkOnBud())
+        Debug.Log("looking for an object", this);
+        if (mainCharacter.iKnowWhereThatObjectIs())
         {
-            transition = "bud is dead";
+            Debug.Log("i know where that object is!!!", this);
+            mainCharacter.goToObjectIknow();
+            mainCharacter.actionManagerTextTime();
+            if (mainCharacter.destinationReached())
+            {
+                Debug.Log("object found", this);
+                transition = "there is object";
+            }
+            else
+            {
+                Debug.Log("destination not reached", this);
+                transition = "keep exploring";
+            }
         }
         else
         {
-
-            Debug.Log("looking for an object", this);
-            if (mainCharacter.iKnowWhereThatObjectIs())
+            if (mainCharacter.findRandomExplorablePlace())
             {
-                Debug.Log("i know where that object is!!!", this);
-                mainCharacter.goToObjectIknow();
+                mainCharacter.actionManagerTextTime();
                 if (mainCharacter.destinationReached())
                 {
-                    mainCharacter.stopAction();
-                    Debug.Log("object found", this);
-                    transition = "there is object";
-                }
-                else
-                {
-                    Debug.Log("destination not reached", this);
-                    transition = "keep exploring";
-                }
-            }
-            else if (!mainCharacter.worldManager.getAllItemsFound())
-            {
-
-                if (mainCharacter.findRandomExplorablePlace())
-                {
-                    if (mainCharacter.destinationReached())
+                    if (mainCharacter.currentTarget.getContainsObject())
                     {
-
-                        mainCharacter.stopAction();
-                        if (mainCharacter.currentTarget.getContainsObject())
-                        {
-                            Debug.Log("object found!!!!", this);
-                            transition = "there is object";
-                        }
-                        else
-                        {
-                            Debug.Log("this place doesnt contain anything", this);
-                            mainCharacter.changeToExplored();
-                            transition = "keep exploring";
-                        }
+                        Debug.Log("object found!!!!", this);
+                        transition = "there is object";
                     }
                     else
                     {
-                        Debug.Log("destination not reached", this);
+                        Debug.Log("this place doesnt contain anything", this);
+                        mainCharacter.changeToExplored();
                         transition = "keep exploring";
                     }
                 }
                 else
                 {
-
-                    Debug.Log("no more places to look", this);
-                    transition = "no more places to look";
+                    Debug.Log("destination not reached", this);
+                    transition = "keep exploring";
                 }
             }
             else
@@ -210,8 +197,7 @@ public class MainQuestM : MonoBehaviour
         if (mainCharacter.destinationReached())
         {
             Debug.Log("platform reached", this);
-
-            mainCharacter.stopAction();
+            mainCharacter.actionManagerTextTime();
             mainCharacter.objectFound.GetComponent<MeshRenderer>().enabled = false;
             transition = "back to explore";
         }
@@ -225,17 +211,23 @@ public class MainQuestM : MonoBehaviour
     private void leaveobjectAction()
     {
         Debug.Log("I might need this object later", this);
-
+        mainCharacter.actionManagerTextTime();
         mainCharacter.addObjectTocontainsAnObjectList();
         mainCharacter.changeToExplored();
         transition = "go back to explore";
     }
 
-    private void reanimateAction()
+    private void checkonbudAction()
     {
-        transition = "bud reanimated";
     }
 
+    private void reanimateAction()
+    {
+    }
+
+    private void updateinfoAction()
+    {
+    }
 
     private void waitforthedoortoopenAction()
     {
@@ -243,18 +235,5 @@ public class MainQuestM : MonoBehaviour
 
     private void waitingAction()
     {
-        if (mainCharacter.worldManager.getExploted())
-        {
-            transition = "quest finished";
-        }
-        else if (mainCharacter.findRandomExplorablePlace() && !mainCharacter.worldManager.getAllItemsFound())
-        {
-            transition = "more places to look";
-        }
-        else
-        {
-            mainCharacter.goToWaitingPoint();
-            transition = "keep waiting";
-        }
     }
 }

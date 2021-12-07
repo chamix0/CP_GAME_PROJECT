@@ -153,8 +153,6 @@
           </e>
           <e p="Scripts" t="Include">
             <e p="camera" t="Include">
-
-              <e p="cameraManager.cs" t="Include" />
               <e p="followPlayer.cs" t="Include" />
             </e>
             <e p="Explorer" t="Include">
@@ -162,7 +160,7 @@
                 <e p="DefendfrommonsterBT.cs" t="Include" />
                 <e p="MainQuestM.cs" t="Include" />
               </e>
-              <e p="CharacterManager.cs" t="Include" />
+              <e p="CharacterController.cs" t="Include" />
               <e p="PlayerInfo.cs" t="Include" />
             </e>
             <e p="Ghost FSM" t="Include">
