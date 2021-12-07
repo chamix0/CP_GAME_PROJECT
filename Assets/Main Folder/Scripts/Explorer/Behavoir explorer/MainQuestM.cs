@@ -34,11 +34,13 @@ public class MainQuestM : MonoBehaviour
     private State waitforthedoortoopen;
     private State waiting;
 
+    #endregion variables
+
     //Place your variables here
     private CharacterManager mainCharacter;
     private String transition;
+    private bool paused=false;
 
-    #endregion variables
 
     // Start is called before the first frame update
 
@@ -112,12 +114,14 @@ public class MainQuestM : MonoBehaviour
     // Update is called once per frame
     private void Update()
     {
-        MainQuestFSM_FSM.Update();
-        MainQuestFSM_FSM.Fire(transition);
+        if (!paused)
+        {
+            MainQuestFSM_FSM.Update();
+            MainQuestFSM_FSM.Fire(transition);
+        }
     }
 
     // Create your desired actions
-
     private void lookingforanobjectAction()
     {
         if (mainCharacter.checkOnBud())
@@ -230,7 +234,6 @@ public class MainQuestM : MonoBehaviour
         transition = "bud reanimated";
     }
 
-
     private void waitforthedoortoopenAction()
     {
     }
@@ -250,5 +253,16 @@ public class MainQuestM : MonoBehaviour
             mainCharacter.goToWaitingPoint();
             transition = "keep waiting";
         }
+    }
+
+    // my methods
+    public void pause()
+    {
+        paused = true;
+    }
+
+    public void unPause()
+    {
+        paused = false;
     }
 }
