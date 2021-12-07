@@ -8,7 +8,7 @@ using UnityEngine.UI;
 /// this class function is to look for random places to explore and update info with other explorers
 /// </summary>
 [DefaultExecutionOrder(-1)]
-public class CharacterManager : MonoBehaviour
+public class CharacterController : MonoBehaviour
 {
     #region VARIABLES
 
@@ -25,12 +25,11 @@ public class CharacterManager : MonoBehaviour
     private List<ExplorableObject> exploredPlaces;
     private List<ExplorableObject> containsAnObjectPlaces;
 
-    private List<CharacterManager> budsList;
+    private List<CharacterController> budsList;
     private Vector3 _currentDestination;
-    private Vector3 waitingPosition;
+    private Vector3 _startingPosition;
     [NonSerialized] public ExplorableObject currentTarget;
     private NavMeshAgent agent;
-    [SerializeField] private GameObject waitingPositionObject;
     [SerializeField] public WorldManager worldManager;
 
     #endregion
@@ -38,7 +37,7 @@ public class CharacterManager : MonoBehaviour
     private void Awake()
     {
         UnityEngine.Random.InitState((int) System.DateTime.Now.Ticks);
-        budsList = new List<CharacterManager>();
+        budsList = new List<CharacterController>();
         explorablePlaces = new List<ExplorableObject>();
         exploredPlaces = new List<ExplorableObject>();
         containsAnObjectPlaces = new List<ExplorableObject>();
@@ -48,7 +47,7 @@ public class CharacterManager : MonoBehaviour
     void Start()
     {
         _currentDestination = transform.position;
-        waitingPosition = waitingPositionObject.transform.position;
+        _startingPosition = _currentDestination;
         currentTarget = null;
         characterLabel.text = PlayerInfo._name;
 
@@ -58,6 +57,7 @@ public class CharacterManager : MonoBehaviour
 
         exploreObjectTimer.setTimer(PlayerInfo.exploringTimeForEachObject);
         updateWithBudTimer.setTimer(PlayerInfo.updatingTimeForEachBud);
+        //updateAnimationCooldownTimer.setTimer(updatingCooldown);
         setPlayers();
     }
 
@@ -65,15 +65,9 @@ public class CharacterManager : MonoBehaviour
     void Update()
     {
         canContinue();
-        destinationStillIsUnexplored();
     }
 
     #region ACTIONS
-
-    public void goToWaitingPoint()
-    {
-        setDestination(waitingPosition, null);
-    }
 
     public bool isMyObjectNeeded()
     {
@@ -82,6 +76,7 @@ public class CharacterManager : MonoBehaviour
 
     public bool findRandomExplorablePlace()
     {
+        System.Random rn = new System.Random();
         if (!currentTarget)
         {
             if (explorablePlaces.Contains(worldManager.getBook()))
@@ -92,31 +87,19 @@ public class CharacterManager : MonoBehaviour
 
             if (explorablePlaces.Count > 0)
             {
-                ExplorableObject aux = explorablePlaces[UnityEngine.Random.Range(0, explorablePlaces.Count - 1)];
+                ExplorableObject aux = explorablePlaces[rn.Next(explorablePlaces.Count - 1)];
                 setDestination(aux.getPosition(), aux);
                 return true;
             }
 
             currentTarget = null;
-            setDestination(waitingPosition, null);
+            setDestination(_startingPosition, null);
             return false;
         }
 
         return true;
     }
 
-    /*public void stopToShareInfo()
-    {
-        if (updateWithBudTimer.hasBeenUsed())
-        {
-            updateWithBudTimer.resetTimer();
-            updateWithBudTimer.start();
-        }
-        else
-        {
-            updateWithBudTimer.start();
-        }
-    }*/
 
     public void stopToExploreAnObject()
     {
@@ -154,30 +137,30 @@ public class CharacterManager : MonoBehaviour
 
     private bool canContinue()
     {
-        if (exploreObjectTimer.pausedTimer() && updateWithBudTimer.pausedTimer())
+        if (exploreObjectTimer.pausedTimer() /*|| updateWithBudTimer.pausedTimer()*/)
         {
             characterLabel.text = "Going to my target...";
             agent.speed = speed;
             return true;
         }
-
-        characterLabel.text = "doing something...";
-        agent.speed = 0;
-        return false;
+        else
+        {
+            characterLabel.text = "Exploring...";
+            agent.speed = 0;
+            return false;
+        }
     }
 
     public void setDestination(Vector3 pos, ExplorableObject exp)
     {
         currentTarget = exp;
         _currentDestination = pos;
-        agent.speed = speed;
         agent.SetDestination(_currentDestination);
     }
 
     public void setDestination(Vector3 pos)
     {
         _currentDestination = pos;
-        agent.speed = speed;
         agent.SetDestination(_currentDestination);
     }
 
@@ -205,13 +188,14 @@ public class CharacterManager : MonoBehaviour
         return Vector3.Distance(transform.position, _currentDestination);
     }
 
-    public bool checkOnBud()
+    public void budOnRange()
     {
-        foreach (CharacterManager c in budsList)
+        foreach (CharacterController c in budsList)
         {
-            if (Vector3.Distance(this.transform.position, c.transform.position) <
+            if (this != c && Vector3.Distance(this.transform.position, c.transform.position) <
                 PlayerInfo._budDetectionRange)
             {
+                //stopToShareInfo();
                 foreach (var explored in c.exploredPlaces)
                 {
                     if (!exploredPlaces.Contains(explored))
@@ -220,23 +204,9 @@ public class CharacterManager : MonoBehaviour
                         exploredPlaces.Add(explored);
                     }
                 }
-
-                foreach (var knownPlace in c.containsAnObjectPlaces)
-                {
-
-                    if (!containsAnObjectPlaces.Contains(knownPlace))
-                    {
-                        containsAnObjectPlaces.Add(knownPlace);
-                    }
-                }
-
             }
-
         }
-
-        return false;
     }
-
 
     public void addObjects(ExplorableObject[] obj)
     {
@@ -253,31 +223,23 @@ public class CharacterManager : MonoBehaviour
             agent.speed = speed;
             setDestination(transform.position, null);
         }
-
-        foreach (var c in exploredPlaces)
-        {
-            if (containsAnObjectPlaces.Contains(c))
-            {
-                if (containsAnObjectPlaces.Remove(c))
-                {
-                    agent.speed = speed;
-                    setDestination(transform.position, null);
-                }
-            }
-        }
     }
 
     public bool destinationReached()
     {
-        return distanceToCurrentDestination() < 0.6;
+        return distanceToCurrentDestination() < 1;
     }
 
-    public void stopAction()
+    public bool actionManagerTextTime()
     {
         if (destinationReached())
         {
             stopToExploreAnObject();
+            canContinue();
+            return true;
         }
+
+        return false;
     }
 
     public void setPlayers()
@@ -286,9 +248,9 @@ public class CharacterManager : MonoBehaviour
         aux = GameObject.FindGameObjectsWithTag("Player");
         foreach (GameObject g in aux)
         {
-            if (g.GetComponent<CharacterManager>() != this)
+            if (g != this)
             {
-                budsList.Add(g.GetComponent<CharacterManager>());
+                budsList.Add(g.GetComponent<CharacterController>());
             }
         }
     }
