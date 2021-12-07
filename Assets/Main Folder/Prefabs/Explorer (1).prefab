@@ -381,6 +381,7 @@ MonoBehaviour:
   updateWithBudTimer: {fileID: 222688622397606119}
   objectFound: {fileID: 7466703282824895889}
   speed: 4
+  waitingPosition: {fileID: 0}
   worldManager: {fileID: 0}
 --- !u!114 &7726087859437722858
 MonoBehaviour:
