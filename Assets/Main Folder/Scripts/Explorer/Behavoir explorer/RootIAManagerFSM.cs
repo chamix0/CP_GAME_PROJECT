@@ -80,9 +80,12 @@ public class RootIAManagerFSM : MonoBehaviour
     private void UtilitySystemAction()
     {
         //manage defense against the monster
-
+        if (mainCharacter.PlayerInfo.isDead)
+        {
+            transition = "character dies";
+        }
         //manage batery
-        if (mainCharacter.PlayerInfo.needsToRecharge)
+        else if (mainCharacter.PlayerInfo.needsToRecharge)
         {
             mainQuest.pause();
             if (!currentChargingPoint)
@@ -113,6 +116,18 @@ public class RootIAManagerFSM : MonoBehaviour
 
     private void DeadAction()
     {
+        if (mainCharacter.PlayerInfo.isDead)
+        {
+            mainCharacter.SetAgentSpeed(0.0f);
+            mainQuest.pause();
+            transition = "still dead";
+        }
+        else
+        {
+            mainCharacter.SetAgentSpeed(mainCharacter.speed);
+            mainQuest.unPause();
+            transition = "character resurrect";
+        }
     }
 
     private void FinishgameAction()

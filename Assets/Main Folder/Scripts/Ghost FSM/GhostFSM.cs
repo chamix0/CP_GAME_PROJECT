@@ -43,6 +43,10 @@ public class GhostFSM : MonoBehaviour
     [SerializeField] private Text _text;
 
     [Range(1.0f, 5.0f)] [SerializeField] private float _distanceToAttack;
+    
+    [Range(1.0f, 5.0f)] [SerializeField] private int _attackDuration;
+    
+    [Range(1.0f, 10f)] [SerializeField] private float _movementSpeed;
 
     #endregion variables
 
@@ -60,6 +64,7 @@ public class GhostFSM : MonoBehaviour
     private void Start()
     {
         _navMeshAgent = GetComponent<NavMeshAgent>();
+        _navMeshAgent.speed = _movementSpeed;
         GhostFSM_FSM = new StateMachineEngine(false);
 
 
@@ -177,7 +182,8 @@ public class GhostFSM : MonoBehaviour
     private void AttackAction()
     {
         _text.text = "Attacking Human";
-        _transition = humanDiedPerception;
+        //_transition = humanDiedPerception;
+        StartCoroutine(Attack(_attackDuration));
         _transition = null;
     }
 
@@ -202,7 +208,17 @@ public class GhostFSM : MonoBehaviour
     private void OnTriggerStay(Collider other)
     {
         if (_attacked || !other.gameObject.tag.Equals("Player")) return;
+        if (other.gameObject.GetComponent<PlayerInfo>().isDead) return;
         _transition = humanInRangePerception;
         _humanChased = other.gameObject.transform;
+    }
+
+    private IEnumerator Attack(int seconds)
+    {
+        _navMeshAgent.speed = 0.0f;
+        _humanChased.GetComponent<PlayerInfo>().Die();
+        yield return new WaitForSeconds(seconds);
+        _navMeshAgent.speed = _movementSpeed;
+        _transition = humanDiedPerception;
     }
 }

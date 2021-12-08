@@ -8,10 +8,9 @@ public class PlayerInfo : MonoBehaviour
     #region DATA
 
     public String _name = "Explorator";
-    public float _monsterDetectionRange = 5;
     public float _budDetectionRange = 5;
     public float exploringTimeForEachObject = 3;
-    public float updatingTimeForEachBud = 5;
+    [Range(1.0f, 5.0f)] [SerializeField] public int _resurrectDuration;
     public float batteryCapacity = 100;
     private Vector3 _startingPoint;
     [NonSerialized] public bool needsToRecharge = false;
@@ -20,8 +19,13 @@ public class PlayerInfo : MonoBehaviour
 
     #endregion
 
-    // Start is called before the first frame update
-    void Start()
+    public void Die()
     {
+        isDead = true;
+    }
+
+    public void Resurrect()
+    {
+        isDead = false;
     }
 }

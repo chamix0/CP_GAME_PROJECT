@@ -8,6 +8,8 @@ public class LightManager : MonoBehaviour
     [SerializeField] private MyTimer timer;
     public PlayerInfo playerInfo;
     private float initialIntensity;
+    private Color initialColor;
+    private bool isFlashing;
 
     // Start is called before the first frame update
     void Start()
@@ -16,12 +18,16 @@ public class LightManager : MonoBehaviour
         timer.setTimer(playerInfo.batteryCapacity);
         timer.start();
         initialIntensity = luz.intensity;
+        initialColor = luz.color;
     }
 
     // Update is called once per frame
     void Update()
     {
-        bajarLuz();
+        if (!isFlashing)
+        {
+            bajarLuz();
+        }
     }
 
     /*
@@ -40,7 +46,7 @@ public class LightManager : MonoBehaviour
             {
                 luz.intensity *= 0.99f;
                 //algo para que vaya a por bateria
-                playerInfo.needsToRecharge=true;
+                playerInfo.needsToRecharge = true;
             }
             else
             {
@@ -48,13 +54,6 @@ public class LightManager : MonoBehaviour
                 playerInfo.needsToRecharge = false;
             }
         }
-    }
-    
-    
-    //flashear
-    public void flashTorch()
-    {
-        timer.takeTime(10);
     }
 
     //reestablecer tiempo
@@ -66,6 +65,20 @@ public class LightManager : MonoBehaviour
 
     public bool CanDefend()
     {
-        return timer.getTimeToFinish() > 10;
+        timer.takeTime(30);
+        if (!(timer.getTimeToFinish() > 0)) return false;
+        StartCoroutine(Flash());
+        return true;
+    }
+
+    private IEnumerator Flash()
+    {
+        isFlashing = true;
+        luz.intensity = 120.0f;
+        luz.color = Color.yellow;
+        yield return new WaitForSeconds(0.5f);
+        luz.intensity = initialIntensity;
+        luz.color = initialColor;
+        isFlashing = false;
     }
 }

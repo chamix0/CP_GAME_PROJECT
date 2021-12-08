@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
@@ -34,6 +35,7 @@ public class CharacterManager : MonoBehaviour
     [SerializeField] private GameObject waitingPositionObject;
     [SerializeField] public WorldManager worldManager;
     [SerializeField] public LightManager lightManager;
+    
 
     #endregion
 
@@ -208,6 +210,7 @@ public class CharacterManager : MonoBehaviour
         currentTarget = null;
     }
 
+
     public void changeToExplored()
     {
         if (currentTarget)
@@ -252,6 +255,8 @@ public class CharacterManager : MonoBehaviour
 
                 if (c.PlayerInfo.isDead)
                 {
+                    StartCoroutine(ResurrectBud(c.PlayerInfo));
+                    c.PlayerInfo.Resurrect();
                     return true;
                 }
             }
@@ -324,5 +329,17 @@ public class CharacterManager : MonoBehaviour
     }
 
     #endregion
+
+    public void SetAgentSpeed(float speed)
+    {
+        agent.speed = speed;
+    }
     
+    private IEnumerator ResurrectBud(PlayerInfo playerInfo)
+    {
+        agent.speed = 0.0f;
+        yield return new WaitForSeconds(playerInfo._resurrectDuration);
+        playerInfo.Resurrect();
+        agent.speed = speed;
+    }
 }
