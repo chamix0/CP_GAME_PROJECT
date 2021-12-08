@@ -3,19 +3,6 @@
   <component name="ChangeListManager">
     <list default="true" id="d4d320ca-14cb-44f5-82e9-b498f08c2bbc" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.CP_GAME_PROJECT/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.CP_GAME_PROJECT/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Main Folder/Prefabs/Explorer (3).prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Main Folder/Prefabs/Explorer (3).prefab" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Main Folder/Prefabs/Ghost.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Main Folder/Prefabs/Ghost.prefab" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Main Folder/Scenes/New Scene.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Main Folder/Scenes/New Scene.unity" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Main Folder/Scenes/New Scene/NavMesh-NavMesh 7.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Main Folder/Scenes/New Scene/NavMesh-NavMesh 7.asset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Main Folder/Scenes/New Scene/NavMesh-NavMesh 7.asset.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Main Folder/Scenes/New Scene/NavMesh-NavMesh 7.asset.meta" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Main Folder/Scripts/Explorer/Behavoir explorer/MainQuestM.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Main Folder/Scripts/Explorer/Behavoir explorer/MainQuestM.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Main Folder/Scripts/Explorer/Behavoir explorer/RootIAManagerFSM.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Main Folder/Scripts/Explorer/Behavoir explorer/RootIAManagerFSM.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Main Folder/Scripts/Explorer/CharacterManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Main Folder/Scripts/Explorer/CharacterManager.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Main Folder/Scripts/Explorer/LightManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Main Folder/Scripts/Explorer/LightManager.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Main Folder/Scripts/Explorer/PlayerInfo.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Main Folder/Scripts/Explorer/PlayerInfo.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Main Folder/Scripts/Ghost FSM/GhostFSM.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Main Folder/Scripts/Ghost FSM/GhostFSM.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ProjectSettings/TagManager.asset" beforeDir="false" afterPath="$PROJECT_DIR$/ProjectSettings/TagManager.asset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/UserSettings/EditorUserSettings.asset" beforeDir="false" afterPath="$PROJECT_DIR$/UserSettings/EditorUserSettings.asset" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
