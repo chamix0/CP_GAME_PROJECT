@@ -141,6 +141,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   matC: {fileID: 2100000, guid: b4bb39ad2e680a042901bbf499c0eb78, type: 2}
   matNoC: {fileID: 2100000, guid: be9bf01527c19eb40a24a87f1152755d, type: 2}
+  meshRenderer: {fileID: 381084757164229507}
 --- !u!1001 &381084758020123805
 PrefabInstance:
   m_ObjectHideFlags: 0

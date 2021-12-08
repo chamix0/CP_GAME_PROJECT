@@ -16,7 +16,7 @@ public class CharacterManager : MonoBehaviour
     //public
     public PlayerInfo PlayerInfo;
     public Text characterLabel;
-    public MyTimer exploreObjectTimer, updateWithBudTimer;
+    public MyTimer exploreObjectTimer;
     public GameObject objectFound;
     public float speed = 3;
 
@@ -25,7 +25,6 @@ public class CharacterManager : MonoBehaviour
     private List<ExplorableObject> explorablePlaces;
     private List<ExplorableObject> exploredPlaces;
     private List<ExplorableObject> containsAnObjectPlaces;
-
     private List<CharacterManager> budsList;
     private Vector3 _currentDestination;
     private Vector3 waitingPosition;
@@ -60,7 +59,6 @@ public class CharacterManager : MonoBehaviour
         objectFound.GetComponent<MeshRenderer>().enabled = false;
 
         exploreObjectTimer.setTimer(PlayerInfo.exploringTimeForEachObject);
-        updateWithBudTimer.setTimer(PlayerInfo.updatingTimeForEachBud);
         setPlayers();
     }
 
@@ -78,15 +76,18 @@ public class CharacterManager : MonoBehaviour
         setDestination(waitingPosition, null);
     }
 
-    public void goToRechargePoint()
+    public chargingPoint goToRechargePoint()
     {
         destinationBuffer = _currentDestination;
-        setDestination(worldManager.getNearestChargingPoint(this.transform.position).transform.position);
+        chargingPoint aux = worldManager.getNearestChargingPoint(this.transform.position);
+        setDestination(aux.transform.position);
+        return aux;
     }
 
     public void restoreDestination()
     {
         setDestination(destinationBuffer);
+        destinationBuffer = waitingPosition;
     }
 
     public void rechargeBattery()
@@ -109,6 +110,12 @@ public class CharacterManager : MonoBehaviour
                 return true;
             }
 
+            if (explorablePlaces.Contains(worldManager.getShovel()))
+            {
+                setDestination(worldManager.getShovel().getPosition(), worldManager.getShovel());
+                return true;
+            }
+
             if (explorablePlaces.Count > 0)
             {
                 ExplorableObject aux = explorablePlaces[UnityEngine.Random.Range(0, explorablePlaces.Count - 1)];
@@ -124,20 +131,14 @@ public class CharacterManager : MonoBehaviour
         return true;
     }
 
-    /*public void stopToShareInfo()
+    public void forgetAboutGraveyard()
     {
-        if (updateWithBudTimer.hasBeenUsed())
-        {
-            updateWithBudTimer.resetTimer();
-            updateWithBudTimer.start();
-        }
-        else
-        {
-            updateWithBudTimer.start();
-        }
-    }*/
+        explorablePlaces.Remove(worldManager.getGraveyardItem());
+        exploredPlaces.Add(worldManager.getGraveyardItem());
+        containsAnObjectPlaces.Remove(worldManager.getGraveyardItem());
+    }
 
-    public void stopToExploreAnObject()
+    public void stopAction()
     {
         if (exploreObjectTimer.hasBeenUsed())
         {
@@ -173,7 +174,7 @@ public class CharacterManager : MonoBehaviour
 
     private bool canContinue()
     {
-        if (exploreObjectTimer.pausedTimer() && updateWithBudTimer.pausedTimer())
+        if (exploreObjectTimer.pausedTimer())
         {
             characterLabel.text = "Going to my target...";
             agent.speed = speed;
@@ -231,11 +232,12 @@ public class CharacterManager : MonoBehaviour
             if (Vector3.Distance(this.transform.position, c.transform.position) <
                 PlayerInfo._budDetectionRange)
             {
-                foreach (var explored in c.exploredPlaces)
+                foreach (ExplorableObject explored in c.exploredPlaces)
                 {
                     if (!exploredPlaces.Contains(explored))
                     {
                         explorablePlaces.Remove(explored);
+                        containsAnObjectPlaces.Remove(explored);
                         exploredPlaces.Add(explored);
                     }
                 }
@@ -247,6 +249,11 @@ public class CharacterManager : MonoBehaviour
                         containsAnObjectPlaces.Add(knownPlace);
                     }
                 }
+
+                if (c.PlayerInfo.isDead)
+                {
+                    return true;
+                }
             }
         }
 
@@ -257,6 +264,11 @@ public class CharacterManager : MonoBehaviour
     public void addObjects(ExplorableObject[] obj)
     {
         explorablePlaces.AddRange(obj);
+    }
+
+    public void addObject(ExplorableObject obj)
+    {
+        explorablePlaces.Add(obj);
     }
 
     /// <summary>
@@ -285,15 +297,17 @@ public class CharacterManager : MonoBehaviour
 
     public bool destinationReached()
     {
-        return distanceToCurrentDestination() < 0.6;
-    }
-
-    public void stopAction()
-    {
-        if (destinationReached())
+        if (distanceToCurrentDestination() < 0.6)
         {
-            stopToExploreAnObject();
+            if (currentTarget == worldManager.getBook() || currentTarget == worldManager.getShovel())
+            {
+                currentTarget.turnOffMesh();
+            }
+
+            return true;
         }
+
+        return false;
     }
 
     public void setPlayers()

@@ -26,6 +26,7 @@ public class RootIAManagerFSM : MonoBehaviour
     private MainQuestM mainQuest;
     private CharacterManager mainCharacter;
     private String transition;
+    private chargingPoint currentChargingPoint;
 
     // Start is called before the first frame update
     private void Start()
@@ -36,7 +37,6 @@ public class RootIAManagerFSM : MonoBehaviour
         mainCharacter = GetComponent<CharacterManager>();
         transition = "";
         CreateStateMachine();
-     
     }
 
 
@@ -85,12 +85,19 @@ public class RootIAManagerFSM : MonoBehaviour
         if (mainCharacter.PlayerInfo.needsToRecharge)
         {
             mainQuest.pause();
-            mainCharacter.goToRechargePoint();
+            if (!currentChargingPoint)
+            {
+                currentChargingPoint = mainCharacter.goToRechargePoint();
+                currentChargingPoint.use();
+            }
+
             if (mainCharacter.destinationReached())
             {
                 mainCharacter.stopAction();
                 mainCharacter.rechargeBattery();
                 mainCharacter.restoreDestination();
+                currentChargingPoint.stopUsing();
+                currentChargingPoint = null;
             }
 
             transition = "keep doing things";

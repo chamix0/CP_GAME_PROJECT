@@ -46,6 +46,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   matC: {fileID: 2100000, guid: b4bb39ad2e680a042901bbf499c0eb78, type: 2}
   matNoC: {fileID: 2100000, guid: be9bf01527c19eb40a24a87f1152755d, type: 2}
+  meshRenderer: {fileID: 6622332199726145514}
 --- !u!1 &3945869238308368542
 GameObject:
   m_ObjectHideFlags: 0

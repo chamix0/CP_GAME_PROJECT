@@ -39,7 +39,7 @@ public class MainQuestM : MonoBehaviour
     //Place your variables here
     private CharacterManager mainCharacter;
     private String transition;
-    private bool paused=false;
+    private bool paused = false;
 
 
     // Start is called before the first frame update
@@ -130,59 +130,20 @@ public class MainQuestM : MonoBehaviour
         }
         else
         {
-            Debug.Log("looking for an object", this);
-            if (mainCharacter.iKnowWhereThatObjectIs())
-            {
-                Debug.Log("i know where that object is!!!", this);
-                mainCharacter.goToObjectIknow();
-                if (mainCharacter.destinationReached())
-                {
-                    mainCharacter.stopAction();
-                    Debug.Log("object found", this);
-                    transition = "there is object";
-                }
-                else
-                {
-                    Debug.Log("destination not reached", this);
-                    transition = "keep exploring";
-                }
-            }
-            else if (!mainCharacter.worldManager.getAllItemsFound())
-            {
-                if (mainCharacter.findRandomExplorablePlace())
-                {
-                    if (mainCharacter.destinationReached())
-                    {
-                        mainCharacter.stopAction();
-                        if (mainCharacter.currentTarget.getContainsObject())
-                        {
-                            Debug.Log("object found!!!!", this);
-                            transition = "there is object";
-                        }
-                        else
-                        {
-                            Debug.Log("this place doesnt contain anything", this);
-                            mainCharacter.changeToExplored();
-                            transition = "keep exploring";
-                        }
-                    }
-                    else
-                    {
-                        Debug.Log("destination not reached", this);
-                        transition = "keep exploring";
-                    }
-                }
-                else
-                {
-                    Debug.Log("no more places to look", this);
-                    transition = "no more places to look";
-                }
-            }
-            else
+            if (mainCharacter.worldManager.getAllItemsFound())
             {
                 Debug.Log("no more places to look", this);
                 transition = "no more places to look";
+                if (mainCharacter.PlayerInfo.hasShovel)
+                {
+                    exploring();
+                    if (mainCharacter.worldManager.getAllItemsPlaced())
+                    {
+                        transition = "no more places to look";
+                    }
+                }
             }
+            else exploring();
         }
     }
 
@@ -190,6 +151,11 @@ public class MainQuestM : MonoBehaviour
     {
         if (mainCharacter.isMyObjectNeeded())
         {
+            if (mainCharacter.currentTarget == mainCharacter.worldManager.getShovel())
+            {
+                mainCharacter.PlayerInfo.hasShovel = true;
+            }
+
             Debug.Log("I need this object", this);
             mainCharacter.worldManager.advanceOnTask();
             mainCharacter.changeToExplored();
@@ -206,18 +172,25 @@ public class MainQuestM : MonoBehaviour
     {
         Debug.Log("taking this object to the platform", this);
 
-        mainCharacter.takeObjectToBombPlatform();
-        if (mainCharacter.destinationReached())
+        if (mainCharacter.worldManager.getCurrentTask() != mainCharacter.worldManager.getGraveyardItem())
         {
-            Debug.Log("platform reached", this);
-            mainCharacter.stopAction();
-            mainCharacter.objectFound.GetComponent<MeshRenderer>().enabled = false;
-            transition = "back to explore";
+            mainCharacter.takeObjectToBombPlatform();
+            if (mainCharacter.destinationReached())
+            {
+                Debug.Log("platform reached", this);
+                mainCharacter.stopAction();
+                mainCharacter.objectFound.GetComponent<MeshRenderer>().enabled = false;
+                transition = "back to explore";
+            }
+            else
+            {
+                Debug.Log("platfrom not reached", this);
+                transition = "item not placed";
+            }
         }
         else
         {
-            Debug.Log("platfrom not reached", this);
-            transition = "item not placed";
+            transition = "back to explore";
         }
     }
 
@@ -264,5 +237,61 @@ public class MainQuestM : MonoBehaviour
     public void unPause()
     {
         paused = false;
+    }
+
+    private void exploring()
+    {
+        if (mainCharacter.iKnowWhereThatObjectIs())
+        {
+            Debug.Log("i know where that object is!!!", this);
+            mainCharacter.goToObjectIknow();
+            if (mainCharacter.destinationReached())
+            {
+                mainCharacter.stopAction();
+                Debug.Log("object found", this);
+                transition = "there is object";
+            }
+            else
+            {
+                Debug.Log("destination not reached", this);
+                transition = "keep exploring";
+            }
+        }
+        else
+        {
+            if (mainCharacter.findRandomExplorablePlace())
+            {
+                checkArrival();
+            }
+            else
+            {
+                Debug.Log("no more places to look", this);
+                transition = "no more places to look";
+            }
+        }
+    }
+
+    public void checkArrival()
+    {
+        if (mainCharacter.destinationReached())
+        {
+            mainCharacter.stopAction();
+            if (mainCharacter.currentTarget.getContainsObject())
+            {
+                Debug.Log("object found!!!!", this);
+                transition = "there is object";
+            }
+            else
+            {
+                Debug.Log("this place doesnt contain anything", this);
+                mainCharacter.changeToExplored();
+                transition = "keep exploring";
+            }
+        }
+        else
+        {
+            Debug.Log("destination not reached", this);
+            transition = "keep exploring";
+        }
     }
 }

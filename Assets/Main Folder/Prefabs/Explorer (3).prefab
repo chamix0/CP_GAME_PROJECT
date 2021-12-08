@@ -191,8 +191,6 @@ GameObject:
   - component: {fileID: 1086827894087199127}
   - component: {fileID: 3336877360819227846}
   - component: {fileID: 7594140589109604590}
-  - component: {fileID: 93585237828265187}
-  - component: {fileID: 6230353700776607207}
   m_Layer: 3
   m_Name: Explorer (3)
   m_TagString: Player
@@ -298,37 +296,12 @@ MonoBehaviour:
   PlayerInfo: {fileID: 1086827894087199127}
   characterLabel: {fileID: 7663265994947006082}
   exploreObjectTimer: {fileID: 7594140589109604590}
-  updateWithBudTimer: {fileID: 93585237828265187}
   objectFound: {fileID: 7333076576172241301}
   speed: 4
   waitingPositionObject: {fileID: 0}
   worldManager: {fileID: 0}
   lightManager: {fileID: 3611008771115743024}
 --- !u!114 &7594140589109604590
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2822260116114541685}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8ee41760b823dcd419de84c109cb639e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &93585237828265187
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2822260116114541685}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8ee41760b823dcd419de84c109cb639e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &6230353700776607207
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -452,7 +425,7 @@ GameObject:
   - component: {fileID: 4734404977723250093}
   - component: {fileID: 7542142324543315734}
   - component: {fileID: 1627856552442263157}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: torch
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -658,7 +631,7 @@ GameObject:
   - component: {fileID: 3391444865304476825}
   - component: {fileID: 3611008771115743024}
   - component: {fileID: 5022998493499333584}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Spot Light
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -913,9 +886,33 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -6460533125056858247, guid: 6739c5ae09fdb074eb7dce71cd8a0c74, type: 3}
+      propertyPath: m_Layer
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: -6345285779419725671, guid: 6739c5ae09fdb074eb7dce71cd8a0c74, type: 3}
+      propertyPath: m_Layer
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 6739c5ae09fdb074eb7dce71cd8a0c74, type: 3}
       propertyPath: m_Name
       value: hombre1
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 6739c5ae09fdb074eb7dce71cd8a0c74, type: 3}
+      propertyPath: m_Layer
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 2215031770772923054, guid: 6739c5ae09fdb074eb7dce71cd8a0c74, type: 3}
+      propertyPath: m_Layer
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 3743993344710040121, guid: 6739c5ae09fdb074eb7dce71cd8a0c74, type: 3}
+      propertyPath: m_Layer
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 4516391061372217368, guid: 6739c5ae09fdb074eb7dce71cd8a0c74, type: 3}
+      propertyPath: m_Layer
+      value: 3
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6739c5ae09fdb074eb7dce71cd8a0c74, type: 3}

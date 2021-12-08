@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using UnityEngine.AI;
 using UnityEngine.UI;
 using Random = System.Random;
 
@@ -8,13 +9,14 @@ public class WorldManager : MonoBehaviour
 {
     public enum ObjectTypes
     {
-        BOOK = 6,
-        KITCHEN = 0,
-        GRAVEYARD = 1,
-        LIVINGROOM = 2,
-        ROOM = 3,
-        BATH = 4,
-        LIBRARY = 5
+        BOOK,
+        KITCHEN,
+        GRAVEYARD,
+        LIVINGROOM,
+        ROOM,
+        BATH,
+        LIBRARY,
+        SHOVEL
     };
 
     #region Data
@@ -29,16 +31,18 @@ public class WorldManager : MonoBehaviour
     private List<ExplorableObject> libraryObjects;
     private List<ExplorableObject> bathObjects;
     private bool allItemsFound = false;
+    private bool allItemsPlaced = false;
     private bool exploted = false;
+    [SerializeField] private Door door;
 
     private ExplorableObject book;
     private ExplorableObject graveYardItem;
+    private ExplorableObject shovel;
 
     private int phase;
 
     //patform where the bomb goes
-    public GameObject platform;
-
+    public Platform platform;
     public Text tasks;
 
     //players
@@ -62,7 +66,7 @@ public class WorldManager : MonoBehaviour
         booksPlaceHolders = new List<GameObject>();
         neededObjects = new List<ExplorableObject>();
         characters = new List<CharacterManager>();
-        chargingPoints=new List<chargingPoint>();
+        chargingPoints = new List<chargingPoint>();
         setChargingPoints();
         setExplorableObjects();
         chooseBookLocation();
@@ -80,9 +84,21 @@ public class WorldManager : MonoBehaviour
     public void advanceOnTask()
     {
         phase++;
-        if (phase > 6)
+
+        if (phase == 6)
+        {
+            door.openTheDoor();
+            pushAnObjectToPlayers(shovel);
+        }
+
+        if (phase == 7)
         {
             allItemsFound = true;
+        }
+
+        if (phase > 7)
+        {
+            allItemsPlaced = true;
         }
 
         printTasks();
@@ -93,9 +109,24 @@ public class WorldManager : MonoBehaviour
         return allItemsFound;
     }
 
+    public bool getAllItemsPlaced()
+    {
+        return allItemsPlaced;
+    }
+
     public ExplorableObject getBook()
     {
         return book;
+    }
+
+    public ExplorableObject getShovel()
+    {
+        return shovel;
+    }
+
+    public ExplorableObject getGraveyardItem()
+    {
+        return graveYardItem;
     }
 
     public void printTasks()
@@ -130,6 +161,7 @@ public class WorldManager : MonoBehaviour
         List<ExplorableObject> aux = new List<ExplorableObject>();
         aux.Add(book);
         aux.AddRange(neededObjects);
+        aux.Add(shovel);
         aux.Add(graveYardItem);
         neededObjects = aux;
     }
@@ -168,6 +200,9 @@ public class WorldManager : MonoBehaviour
         graveYardObjects[i].setContainsObject(true);
         graveYardObjects[i].setType(ObjectTypes.GRAVEYARD);
         graveYardItem = graveYardObjects[i];
+
+        shovel.setContainsObject(true);
+        shovel.setType(ObjectTypes.SHOVEL);
     }
 
     private void pushInfoToPlayers()
@@ -175,6 +210,14 @@ public class WorldManager : MonoBehaviour
         foreach (CharacterManager c in characters)
         {
             c.addObjects(allObjects.ToArray());
+        }
+    }
+
+    private void pushAnObjectToPlayers(ExplorableObject explorableObject)
+    {
+        foreach (CharacterManager c in characters)
+        {
+            c.addObject(explorableObject);
         }
     }
 
@@ -191,6 +234,7 @@ public class WorldManager : MonoBehaviour
                     : aux;
             }
         }
+
         return aux;
     }
 
@@ -270,6 +314,8 @@ public class WorldManager : MonoBehaviour
         {
             booksPlaceHolders.Add(g);
         }
+
+        shovel = GameObject.FindGameObjectWithTag("shovel").GetComponent<ExplorableObject>();
     }
 
     private void setPlayers()
