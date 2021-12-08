@@ -1,19 +1,9 @@
 fileFormatVersion: 2
-guid: b6d074f7696ef234eba11d1280dc96e4
+guid: 2959a96c26f5c354a851fd219b5264be
 ModelImporter:
   serializedVersion: 20200
   internalIDToNameTable: []
-  externalObjects:
-  - first:
-      type: UnityEngine:Texture2D
-      assembly: UnityEngine.CoreModule
-      name: OldBookCover2
-    second: {fileID: 2800000, guid: 2f85885e5723a784fbdb20fb57f0e793, type: 3}
-  - first:
-      type: UnityEngine:Texture2D
-      assembly: UnityEngine.CoreModule
-      name: Paper
-    second: {fileID: 2800000, guid: 8eeae4f1228f3e84cbb376d991edee38, type: 3}
+  externalObjects: {}
   materials:
     materialImportMode: 2
     materialName: 0

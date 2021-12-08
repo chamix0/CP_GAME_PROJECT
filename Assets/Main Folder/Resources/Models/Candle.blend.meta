@@ -1,19 +1,39 @@
 fileFormatVersion: 2
-guid: b6d074f7696ef234eba11d1280dc96e4
+guid: 1d63cbe7a430119458d80d5adc2afd7e
 ModelImporter:
   serializedVersion: 20200
   internalIDToNameTable: []
   externalObjects:
   - first:
-      type: UnityEngine:Texture2D
+      type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
-      name: OldBookCover2
-    second: {fileID: 2800000, guid: 2f85885e5723a784fbdb20fb57f0e793, type: 3}
+      name: material0_candle_0.pn
+    second: {fileID: 2100000, guid: 47484d843f4bb1945866632a23c64bcc, type: 2}
   - first:
-      type: UnityEngine:Texture2D
+      type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
-      name: Paper
-    second: {fileID: 2800000, guid: 8eeae4f1228f3e84cbb376d991edee38, type: 3}
+      name: material1_candle_0.pn
+    second: {fileID: 2100000, guid: b0736c11568f12f40892e4cb5754fa46, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: material2_candle_1.pn
+    second: {fileID: 2100000, guid: f62dca9bdfcbece449387d4759d65674, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: material3_candle_2.pn
+    second: {fileID: 2100000, guid: a5a9457614d7eb74391c033adb1e79e4, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: material4_candle_0.pn
+    second: {fileID: 2100000, guid: 6297e4cda4ee71845befb4af294e3f3f, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: material5_candle_0.pn
+    second: {fileID: 2100000, guid: 69501e8b0faef9e49868063cbbc19a2a, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0

@@ -3,18 +3,13 @@
   <component name="ChangeListManager">
     <list default="true" id="d4d320ca-14cb-44f5-82e9-b498f08c2bbc" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.CP_GAME_PROJECT/.idea/contentModel.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.CP_GAME_PROJECT/.idea/contentModel.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.CP_GAME_PROJECT/.idea/indexLayout.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.CP_GAME_PROJECT/.idea/indexLayout.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.CP_GAME_PROJECT/.idea/projectSettingsUpdater.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.CP_GAME_PROJECT/.idea/projectSettingsUpdater.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.CP_GAME_PROJECT/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.CP_GAME_PROJECT/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Main Folder/Prefabs/charging point.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Main Folder/Prefabs/charging point.prefab" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Main Folder/Resources/Models/Props/cama.fbx.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Main Folder/Resources/Models/Props/cama.fbx.meta" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Main Folder/Scenes/New Scene/NavMesh-NavMesh 7.asset" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Main Folder/Scenes/New Scene/NavMesh-NavMesh 7.asset.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Main Folder/Scripts/Explorer/CharacterManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Main Folder/Scripts/Explorer/CharacterManager.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Main Folder/Scripts/World/Door.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Main Folder/Scripts/World/Door.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ProjectSettings/GraphicsSettings.asset" beforeDir="false" afterPath="$PROJECT_DIR$/ProjectSettings/GraphicsSettings.asset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ProjectSettings/Packages/com.unity.probuilder/Settings.json" beforeDir="false" afterPath="$PROJECT_DIR$/ProjectSettings/Packages/com.unity.probuilder/Settings.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/UserSettings/EditorUserSettings.asset" beforeDir="false" afterPath="$PROJECT_DIR$/UserSettings/EditorUserSettings.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Main Folder/Prefabs/Explorable objects/Room Explorable.prefab" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Main Folder/Prefabs/Explorable objects/Room Explorable.prefab.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Main Folder/Prefabs/book.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Main Folder/Prefabs/book.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Main Folder/Resources/Models/Props/Libro2.fbx.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Main Folder/Resources/Models/Props/Libro2.fbx.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Main Folder/Scenes/house.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Main Folder/Scenes/house.unity" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Main Folder/Scenes/house/NavMesh-NavMesh.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Main Folder/Scenes/house/NavMesh-NavMesh.asset" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -39,6 +34,7 @@
     <setting file="file://$PROJECT_DIR$/Assets/Main Folder/Scripts/Explorer/LightManager.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/UserSettings/EditorUserSettings.asset" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Intelligent Behaviours GUI Package/GUI Control/GUIElement.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Main Folder/Scripts/World/flame.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Main Folder/NavMeshComponents/Editor/NavMeshSurfaceEditor.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Main Folder/Scripts/World/ExplorableObject.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Main Folder/Scripts/World/WorldManager.cs" root0="FORCE_HIGHLIGHTING" />
@@ -87,6 +83,7 @@
         <option value="$PROJECT_DIR$/Assets/Main Folder/Scripts/Explorer/CharacterManager.cs" />
         <option value="$PROJECT_DIR$/Assets/Main Folder/Scripts/World/bookColor.cs" />
         <option value="$PROJECT_DIR$/Assets/Main Folder/Scripts/World/Door.cs" />
+        <option value="$PROJECT_DIR$/Assets/Main Folder/Scripts/World/flame.cs" />
       </list>
     </option>
   </component>

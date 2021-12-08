@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 5136262419132615904}
   - component: {fileID: 765692131412315608}
   m_Layer: 0
-  m_Name: Bath explorable
+  m_Name: Bath explorable 1
   m_TagString: BathExplorable
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
