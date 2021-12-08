@@ -63,4 +63,9 @@ public class LightManager : MonoBehaviour
         timer.resetTimer();
         timer.start();
     }
+
+    public bool CanDefend()
+    {
+        return timer.getTimeToFinish() > 10;
+    }
 }

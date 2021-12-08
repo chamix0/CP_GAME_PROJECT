@@ -33,7 +33,7 @@ public class CharacterManager : MonoBehaviour
     private Vector3 destinationBuffer;
     [SerializeField] private GameObject waitingPositionObject;
     [SerializeField] public WorldManager worldManager;
-    [SerializeField] private LightManager lightManager;
+    [SerializeField] public LightManager lightManager;
 
     #endregion
 
@@ -324,4 +324,5 @@ public class CharacterManager : MonoBehaviour
     }
 
     #endregion
+    
 }
