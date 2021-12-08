@@ -90,7 +90,6 @@ GameObject:
   - component: {fileID: 7724710925771181450}
   - component: {fileID: 6921243124497939507}
   - component: {fileID: 1834655704250869871}
-  - component: {fileID: 7534977648261768776}
   m_Layer: 3
   m_Name: mesh
   m_TagString: Untagged
@@ -162,20 +161,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!136 &7534977648261768776
-CapsuleCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2193172207221196381}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  m_Radius: 0.5
-  m_Height: 2
-  m_Direction: 1
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &2822260116114541685
 GameObject:
   m_ObjectHideFlags: 0
@@ -193,6 +178,8 @@ GameObject:
   - component: {fileID: 7594140589109604590}
   - component: {fileID: 93585237828265187}
   - component: {fileID: 6230353700776607207}
+  - component: {fileID: 490246686730910260}
+  - component: {fileID: 6440824500658020651}
   m_Layer: 3
   m_Name: Explorer (3)
   m_TagString: Player
@@ -340,6 +327,36 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8ee41760b823dcd419de84c109cb639e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!136 &490246686730910260
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2822260116114541685}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  m_Radius: 0.5
+  m_Height: 1.73
+  m_Direction: 1
+  m_Center: {x: 0, y: 0.88, z: 0}
+--- !u!54 &6440824500658020651
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2822260116114541685}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 1
+  m_IsKinematic: 1
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
 --- !u!1 &3241292911573231595
 GameObject:
   m_ObjectHideFlags: 0
@@ -451,7 +468,6 @@ GameObject:
   - component: {fileID: 352392152419452155}
   - component: {fileID: 4734404977723250093}
   - component: {fileID: 7542142324543315734}
-  - component: {fileID: 1627856552442263157}
   m_Layer: 0
   m_Name: torch
   m_TagString: Untagged
@@ -523,20 +539,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!136 &1627856552442263157
-CapsuleCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3471170764443869635}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  m_Radius: 0.5000001
-  m_Height: 2
-  m_Direction: 1
-  m_Center: {x: 0.000000059604645, y: 0, z: -0.00000008940697}
 --- !u!1 &3952683291024063575
 GameObject:
   m_ObjectHideFlags: 0
@@ -546,9 +548,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7907918606802970030}
-  - component: {fileID: 3391671423696731379}
-  - component: {fileID: 6728519995406574572}
-  - component: {fileID: 2046479348049721142}
   - component: {fileID: 8531307004269261078}
   m_Layer: 3
   m_Name: Sphere
@@ -571,68 +570,6 @@ Transform:
   m_Father: {fileID: 2765650230415770816}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!33 &3391671423696731379
-MeshFilter:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3952683291024063575}
-  m_Mesh: {fileID: 10207, guid: 0000000000000000e000000000000000, type: 0}
---- !u!23 &6728519995406574572
-MeshRenderer:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3952683291024063575}
-  m_Enabled: 0
-  m_CastShadows: 1
-  m_ReceiveShadows: 1
-  m_DynamicOccludee: 1
-  m_MotionVectors: 1
-  m_LightProbeUsage: 1
-  m_ReflectionProbeUsage: 1
-  m_RayTracingMode: 2
-  m_RayTraceProcedural: 0
-  m_RenderingLayerMask: 1
-  m_RendererPriority: 0
-  m_Materials:
-  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
-  m_StaticBatchInfo:
-    firstSubMesh: 0
-    subMeshCount: 0
-  m_StaticBatchRoot: {fileID: 0}
-  m_ProbeAnchor: {fileID: 0}
-  m_LightProbeVolumeOverride: {fileID: 0}
-  m_ScaleInLightmap: 1
-  m_ReceiveGI: 1
-  m_PreserveUVs: 0
-  m_IgnoreNormalsForChartDetection: 0
-  m_ImportantGI: 0
-  m_StitchLightmapSeams: 1
-  m_SelectedEditorRenderState: 3
-  m_MinimumChartSize: 4
-  m_AutoUVMaxDistance: 0.5
-  m_AutoUVMaxAngle: 89
-  m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
-  m_SortingOrder: 0
-  m_AdditionalVertexStreams: {fileID: 0}
---- !u!135 &2046479348049721142
-SphereCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3952683291024063575}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 0
-  serializedVersion: 2
-  m_Radius: 0.5
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &8531307004269261078
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -778,7 +715,6 @@ GameObject:
   - component: {fileID: 1822508203589574796}
   - component: {fileID: 7452522927244345251}
   - component: {fileID: 783519587774208481}
-  - component: {fileID: 6198378011593553517}
   m_Layer: 3
   m_Name: Cube (1)
   m_TagString: Untagged
@@ -849,19 +785,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &6198378011593553517
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7333076576172241301}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1001 &362524579556529566
 PrefabInstance:
   m_ObjectHideFlags: 0
