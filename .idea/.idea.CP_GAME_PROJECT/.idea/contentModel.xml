@@ -176,7 +176,9 @@
             </e>
             <e p="World" t="Include">
               <e p="chargingPoint.cs" t="Include" />
+              <e p="Door.cs" t="Include" />
               <e p="ExplorableObject.cs" t="Include" />
+              <e p="platform.cs" t="Include" />
               <e p="WorldManager.cs" t="Include" />
             </e>
           </e>

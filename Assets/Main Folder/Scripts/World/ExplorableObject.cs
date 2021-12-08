@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -6,8 +7,8 @@ public class ExplorableObject : MonoBehaviour
 {
     public Material matC, matNoC;
     private bool containsOnject;
+    [SerializeField] private MeshRenderer meshRenderer;
     private WorldManager.ObjectTypes type;
-
 
     public Vector3 getPosition()
     {
@@ -32,6 +33,11 @@ public class ExplorableObject : MonoBehaviour
     public WorldManager.ObjectTypes getType()
     {
         return type;
+    }
+
+    public void turnOffMesh()
+    {
+        meshRenderer.enabled = false;
     }
 
     public void setExplored()
