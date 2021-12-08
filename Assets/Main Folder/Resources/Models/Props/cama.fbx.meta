@@ -3,7 +3,37 @@ guid: 3f25260f808506b4ab114198f44b0085
 ModelImporter:
   serializedVersion: 20200
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: lambert3
+    second: {fileID: 2100000, guid: 251432b43c6b419438258d64704b7ded, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: lambert4
+    second: {fileID: 2100000, guid: 91a37c6064d465c43bb997318a80f3ad, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: lambert5
+    second: {fileID: 2100000, guid: 032b5f90f4d424e40a608305fcc424ae, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: lambert6
+    second: {fileID: 2100000, guid: f76eaee59e06ce742bf801f4b486e249, type: 2}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: colcha
+    second: {fileID: 2800000, guid: 31f1a90913b58074fafe414b16dc662e, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: madera_cama_oscura
+    second: {fileID: 2800000, guid: 7a518d60676e23d4db70e5435b442036, type: 3}
   materials:
     materialImportMode: 2
     materialName: 0

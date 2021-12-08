@@ -178,7 +178,7 @@ public class CharacterManager : MonoBehaviour
     {
         if (exploreObjectTimer.pausedTimer())
         {
-            characterLabel.text = "Going to my target...";
+            characterLabel.text = "aaaaaaaaaaa";
             agent.speed = speed;
             return true;
         }
