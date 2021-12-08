@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 640967850114541822}
   - component: {fileID: 640967850114541569}
   - component: {fileID: 640967850114541568}
-  m_Layer: 3
+  m_Layer: 8
   m_Name: Text
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -91,7 +91,7 @@ GameObject:
   - component: {fileID: 640967850317472162}
   - component: {fileID: 640967850317472165}
   - component: {fileID: 640967850317472164}
-  m_Layer: 3
+  m_Layer: 8
   m_Name: Canvas
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -194,7 +194,7 @@ GameObject:
   - component: {fileID: 640967850414541523}
   - component: {fileID: 640967850414541522}
   - component: {fileID: 640967850414541516}
-  m_Layer: 7
+  m_Layer: 8
   m_Name: Ghost
   m_TagString: Ghost
   m_Icon: {fileID: 0}
@@ -315,6 +315,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _text: {fileID: 640967850114541568}
   _distanceToAttack: 3.01
+  _attackDuration: 0
+  _movementSpeed: 0
 --- !u!54 &640967850414541516
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -341,7 +343,7 @@ GameObject:
   m_Component:
   - component: {fileID: 640967851735554260}
   - component: {fileID: 640967851735554261}
-  m_Layer: 7
+  m_Layer: 8
   m_Name: TextoPlaceHolder
   m_TagString: Untagged
   m_Icon: {fileID: 0}

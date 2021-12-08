@@ -16,6 +16,7 @@ TagManager:
   - charging point
   - door
   - shovel
+  - Ghost
   layers:
   - Default
   - TransparentFX
@@ -25,7 +26,7 @@ TagManager:
   - UI
   - books
   - ignore
-  - 
+  - Ghost
   - 
   - 
   - 

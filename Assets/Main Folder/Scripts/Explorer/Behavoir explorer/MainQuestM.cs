@@ -80,7 +80,6 @@ public class MainQuestM : MonoBehaviour
         objectfound = MainQuestFSM_FSM.CreateState("Object found", objectfoundAction);
         takeobjecttotheplace = MainQuestFSM_FSM.CreateState("Take object to the place", takeobjecttotheplaceAction);
         leaveobject = MainQuestFSM_FSM.CreateState("Leave object", leaveobjectAction);
-        reanimate = MainQuestFSM_FSM.CreateState("Reanimate", reanimateAction);
         waitforthedoortoopen = MainQuestFSM_FSM.CreateState("Wait for the door to open", waitforthedoortoopenAction);
         waiting = MainQuestFSM_FSM.CreateState("Waiting", waitingAction);
 
@@ -92,8 +91,6 @@ public class MainQuestM : MonoBehaviour
             lookingforanobject);
         MainQuestFSM_FSM.CreateTransition("back to explore", takeobjecttotheplace, backtoexplorePerception,
             lookingforanobject);
-        MainQuestFSM_FSM.CreateTransition("bud is dead", lookingforanobject, budisdeadPerception, reanimate);
-        MainQuestFSM_FSM.CreateTransition("bud reanimated", reanimate, budreanimatedPerception, lookingforanobject);
         MainQuestFSM_FSM.CreateTransition("no more places to look", lookingforanobject, nomoreplacestolookPerception,
             waiting);
         MainQuestFSM_FSM.CreateTransition("more places to look", waiting, MoreplacestolookPerception,
@@ -124,27 +121,21 @@ public class MainQuestM : MonoBehaviour
     // Create your desired actions
     private void lookingforanobjectAction()
     {
-        if (mainCharacter.checkOnBud())
+        mainCharacter.checkOnBud();
+        if (mainCharacter.worldManager.getAllItemsFound())
         {
-            transition = "bud is dead";
-        }
-        else
-        {
-            if (mainCharacter.worldManager.getAllItemsFound())
+            Debug.Log("no more places to look", this);
+            transition = "no more places to look";
+            if (mainCharacter.PlayerInfo.hasShovel)
             {
-                Debug.Log("no more places to look", this);
-                transition = "no more places to look";
-                if (mainCharacter.PlayerInfo.hasShovel)
+                exploring();
+                if (mainCharacter.worldManager.getAllItemsPlaced())
                 {
-                    exploring();
-                    if (mainCharacter.worldManager.getAllItemsPlaced())
-                    {
-                        transition = "no more places to look";
-                    }
+                    transition = "no more places to look";
                 }
             }
-            else exploring();
         }
+        else exploring();
     }
 
     private void objectfoundAction()
@@ -200,11 +191,6 @@ public class MainQuestM : MonoBehaviour
         mainCharacter.addObjectTocontainsAnObjectList();
         mainCharacter.changeToExplored();
         transition = "go back to explore";
-    }
-
-    private void reanimateAction()
-    {
-        transition = "bud reanimated";
     }
 
     private void waitforthedoortoopenAction()
