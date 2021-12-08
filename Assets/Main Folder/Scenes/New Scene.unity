@@ -40974,6 +40974,17 @@ MonoBehaviour:
   m_Area: 1
   m_IgnoreFromBuild: 0
   m_AffectedAgents: ffffffff
+--- !u!114 &1654973710 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3342781236303447213, guid: 21d7ad25a9859a340bc3840642bf5d0a, type: 3}
+  m_PrefabInstance: {fileID: 606349773}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1654973707}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b6769b8ec9a90a24980e30a0252ef286, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &1659603169 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 6502999543245991547, guid: 5bb08898e6161e647b2f39d000b3b276, type: 3}
@@ -51021,6 +51032,6 @@ PrefabInstance:
     - target: {fileID: 6502999543245991547, guid: 5bb08898e6161e647b2f39d000b3b276, type: 3}
       propertyPath: platform
       value: 
-      objectReference: {fileID: 1654973707}
+      objectReference: {fileID: 1654973710}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5bb08898e6161e647b2f39d000b3b276, type: 3}
