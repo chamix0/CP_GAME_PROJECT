@@ -3,7 +3,47 @@ guid: 15be7c2f6204b8c4280dbe07648855f1
 ModelImporter:
   serializedVersion: 20200
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: Metal_V208_Diffuse
+    second: {fileID: 2800000, guid: f2e493c7edbdc10418dc443ce9a0b316, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: Metal_V208_Glossiness
+    second: {fileID: 2800000, guid: 757cae3471438014b94a1e1cf739cfb9, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: Metal_V208_Normal
+    second: {fileID: 2800000, guid: abcecf4bb6946c44d8ae3345f1477f82, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: Metal_V208_Reflection
+    second: {fileID: 2800000, guid: b30713bf0567e6c4da125a1e626e76de, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: Wood_V090_Diffuse
+    second: {fileID: 2800000, guid: 1013aca98ca8a5d4d94b445dc4322e47, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: Wood_V090_Glossiness
+    second: {fileID: 2800000, guid: c8bee45dd1fbfe14b928881fb714c559, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: Wood_V090_Normal
+    second: {fileID: 2800000, guid: c2679cdee001ffa41acaa144d19a73e1, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: Wood_V090_Reflection
+    second: {fileID: 2800000, guid: 7ddd72a0ad922de40a9d78df2ed35dc0, type: 3}
   materials:
     materialImportMode: 2
     materialName: 0

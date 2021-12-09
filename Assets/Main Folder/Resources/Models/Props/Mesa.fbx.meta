@@ -3,7 +3,17 @@ guid: c5dfc12f39fcb404c8727baf4df20d59
 ModelImporter:
   serializedVersion: 20200
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: TexturesCom_FabricPlain0020_1_seamless_S
+    second: {fileID: 2800000, guid: b4c271632b8145144b3bf687140ff2e4, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: TexturesCom_Rough Wood Planks_diffuse_S
+    second: {fileID: 2800000, guid: 9094747c66348414b948e9d37f23dbf2, type: 3}
   materials:
     materialImportMode: 2
     materialName: 0

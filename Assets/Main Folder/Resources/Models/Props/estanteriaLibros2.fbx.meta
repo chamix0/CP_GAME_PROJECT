@@ -3,7 +3,17 @@ guid: 59872a5ad97b25643a3bec9631d1ae31
 ModelImporter:
   serializedVersion: 20200
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: BOOKS_TEXTURE
+    second: {fileID: 2800000, guid: 7885a1698bbb2454bb73899a7ce50824, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: SHELF_TEXTURE
+    second: {fileID: 2800000, guid: 9596e782a4db5ea4ea93bbd24023e950, type: 3}
   materials:
     materialImportMode: 2
     materialName: 0
