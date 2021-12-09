@@ -133,13 +133,6 @@ public class CharacterManager : MonoBehaviour
         return true;
     }
 
-    public void forgetAboutGraveyard()
-    {
-        explorablePlaces.Remove(worldManager.getGraveyardItem());
-        exploredPlaces.Add(worldManager.getGraveyardItem());
-        containsAnObjectPlaces.Remove(worldManager.getGraveyardItem());
-    }
-
     public void stopAction()
     {
         if (exploreObjectTimer.hasBeenUsed())

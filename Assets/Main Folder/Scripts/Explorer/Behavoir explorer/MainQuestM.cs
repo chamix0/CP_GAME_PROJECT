@@ -40,7 +40,7 @@ public class MainQuestM : MonoBehaviour
     private CharacterManager mainCharacter;
     private String transition;
     private bool paused = false;
-
+    private ExplorableObject carryingObject;
 
     // Start is called before the first frame update
 
@@ -148,7 +148,7 @@ public class MainQuestM : MonoBehaviour
             }
 
             Debug.Log("I need this object", this);
-            mainCharacter.worldManager.advanceOnTask();
+            carryingObject = mainCharacter.worldManager.advanceOnTask();
             mainCharacter.changeToExplored();
             transition = "object needed";
         }
@@ -169,8 +169,11 @@ public class MainQuestM : MonoBehaviour
             if (mainCharacter.destinationReached())
             {
                 Debug.Log("platform reached", this);
+
                 mainCharacter.stopAction();
+                mainCharacter.worldManager.putObjectInPlatform(carryingObject);
                 mainCharacter.objectFound.GetComponent<MeshRenderer>().enabled = false;
+                carryingObject = null;
                 transition = "back to explore";
             }
             else

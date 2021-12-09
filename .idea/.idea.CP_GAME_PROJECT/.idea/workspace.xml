@@ -3,13 +3,12 @@
   <component name="ChangeListManager">
     <list default="true" id="d4d320ca-14cb-44f5-82e9-b498f08c2bbc" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.CP_GAME_PROJECT/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.CP_GAME_PROJECT/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Main Folder/Prefabs/furniture/Candle.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Main Folder/Prefabs/furniture/Candle.prefab" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Main Folder/Scripts/Explorer/Behavoir explorer/RootIAManagerFSM.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Main Folder/Scripts/Explorer/Behavoir explorer/RootIAManagerFSM.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Main Folder/Prefabs/platform.prefab" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Main Folder/Prefabs/platform.prefab.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Main Folder/Scripts/Explorer/Behavoir explorer/MainQuestM.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Main Folder/Scripts/Explorer/Behavoir explorer/MainQuestM.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Main Folder/Scripts/Explorer/CharacterManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Main Folder/Scripts/Explorer/CharacterManager.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Main Folder/Scripts/World/Platform.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Main Folder/Scripts/World/Platform.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Main Folder/Scripts/World/WorldManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Main Folder/Scripts/World/WorldManager.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Main Folder/animations/Candle.controller" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Main Folder/animations/Candle.controller.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Main Folder/animations/glow.anim" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Main Folder/animations/glow.anim" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Main Folder/animations/glow2.anim" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Main Folder/animations/glow2.anim" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -76,9 +75,7 @@
         <option value="$PROJECT_DIR$/Assets/Main Folder/Scripts/World/chargingPoint.cs" />
         <option value="$PROJECT_DIR$/Assets/Main Folder/Scripts/World/ExplorableObject.cs" />
         <option value="$PROJECT_DIR$/Assets/Main Folder/Scripts/Explorer/LightManager.cs" />
-        <option value="$PROJECT_DIR$/Assets/Main Folder/Scripts/Explorer/Behavoir explorer/MainQuestM.cs" />
         <option value="$PROJECT_DIR$/Assets/Main Folder/Scripts/Explorer/PlayerInfo.cs" />
-        <option value="$PROJECT_DIR$/Assets/Main Folder/Scripts/Explorer/CharacterManager.cs" />
         <option value="$PROJECT_DIR$/Assets/Main Folder/Scripts/World/bookColor.cs" />
         <option value="$PROJECT_DIR$/Assets/Main Folder/Scripts/World/Door.cs" />
         <option value="$PROJECT_DIR$/Assets/Main Folder/Scripts/World/flame.cs" />
@@ -86,7 +83,10 @@
         <option value="$PROJECT_DIR$/Assets/Main Folder/Scripts/camera/cameraManager.cs" />
         <option value="$PROJECT_DIR$/Assets/Main Folder/Scripts/camera/followPlayer.cs" />
         <option value="$PROJECT_DIR$/Assets/Main Folder/Scripts/Explorer/Behavoir explorer/RootIAManagerFSM.cs" />
+        <option value="$PROJECT_DIR$/Assets/Main Folder/Scripts/Explorer/CharacterManager.cs" />
         <option value="$PROJECT_DIR$/Assets/Main Folder/Scripts/World/WorldManager.cs" />
+        <option value="$PROJECT_DIR$/Assets/Main Folder/Scripts/World/Platform.cs" />
+        <option value="$PROJECT_DIR$/Assets/Main Folder/Scripts/Explorer/Behavoir explorer/MainQuestM.cs" />
       </list>
     </option>
   </component>
@@ -141,6 +141,7 @@
       <workItem from="1638794822928" duration="32951000" />
       <workItem from="1638881595603" duration="28868000" />
       <workItem from="1638976242243" duration="2325000" />
+      <workItem from="1639050344313" duration="6513000" />
     </task>
     <servers />
   </component>
