@@ -5,28 +5,45 @@ using UnityEngine;
 
 public class cameraManager : MonoBehaviour
 {
-    public Camera cam1;
-    public Camera cam2;
+  
+    private Camera currentCamera;
 
+    private int index;
+
+    public List<Camera> cams;
 
     private void Start()
     {
-        cam1.enabled = true;
-        cam2.enabled = false;
+        index = 0;
+        currentCamera = cams[index];
+        currentCamera.enabled = true;
     }
 
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.E))
+        if (Input.GetKeyDown(KeyCode.O))
         {
-            cam1.enabled = false;
-            cam2.enabled = true;
+            index = index - 1 < 0 ? cams.Count - 1 : index - 1;
+            currentCamera = cams[index % cams.Count];
         }
-        else if (Input.GetKeyDown(KeyCode.R))
+
+        if (Input.GetKeyDown(KeyCode.P))
         {
-            cam1.enabled = true;
-            cam2.enabled = false;
+            index++;
+            currentCamera = cams[index % cams.Count];
+        }
+
+        foreach (var c in cams)
+        {
+            if (c != currentCamera)
+            {
+                c.enabled = false;
+            }
+            else
+            {
+                c.enabled = true;
+            }
         }
     }
 }
