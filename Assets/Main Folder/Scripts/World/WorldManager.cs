@@ -131,14 +131,7 @@ public class WorldManager : MonoBehaviour
 
     public void printTasks()
     {
-        string tas;
-        tas = "" + getCurrentTask().getType() + "\n";
-        tas += "-------\n";
-        for (int i = 0; i < neededObjects.Count; i++)
-        {
-            tas += "\n" + neededObjects[i].getType();
-        }
-
+        string tas = "" + getCurrentTask().getType() + "\n";
         tasks.text = "\n" + tas;
     }
 
@@ -229,9 +222,11 @@ public class WorldManager : MonoBehaviour
         {
             if (!chargingPoints[i].isBeingUsed())
             {
-                aux = Vector3.Distance(chargingPoints[i].transform.position, charPosition) < min
-                    ? chargingPoints[i]
-                    : aux;
+                if (Vector3.Distance(chargingPoints[i].transform.position, charPosition) < min)
+                {
+                    min = Vector3.Distance(chargingPoints[i].transform.position, charPosition);
+                    aux = chargingPoints[i];
+                }
             }
         }
 
