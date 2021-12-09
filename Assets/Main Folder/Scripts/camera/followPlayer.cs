@@ -26,13 +26,13 @@ public class followPlayer : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Q))
+        if (Input.GetKeyDown(KeyCode.K))
         {
             index = index - 1 < 0 ? targets.Count - 1 : index - 1;
             currentTarget = targets[index % targets.Count];
         }
 
-        if (Input.GetKeyDown(KeyCode.W))
+        if (Input.GetKeyDown(KeyCode.L))
         {
             index++;
             currentTarget = targets[index % targets.Count];
