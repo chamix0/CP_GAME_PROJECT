@@ -47809,6 +47809,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 640967850414541522, guid: 61b2afa82c318bf4086121e02781311c, type: 3}
+      propertyPath: _movementSpeed
+      value: 5.02
+      objectReference: {fileID: 0}
+    - target: {fileID: 640967850414541522, guid: 61b2afa82c318bf4086121e02781311c, type: 3}
+      propertyPath: _attackDuration
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 640967850414541525, guid: 61b2afa82c318bf4086121e02781311c, type: 3}
       propertyPath: m_Name
       value: Ghost
