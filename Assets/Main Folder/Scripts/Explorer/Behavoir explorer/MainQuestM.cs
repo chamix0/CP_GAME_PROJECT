@@ -121,7 +121,6 @@ public class MainQuestM : MonoBehaviour
     // Create your desired actions
     private void lookingforanobjectAction()
     {
-        //mainCharacter.checkOnBud();
         if (mainCharacter.worldManager.getAllItemsFound())
         {
             mainCharacter.PrintLabel("no more places to look");
@@ -148,11 +147,7 @@ public class MainQuestM : MonoBehaviour
                 mainCharacter.playerInfo.hasShovel = true;
             }
 
-
             mainCharacter.PrintLabel("I need this object");
-            //Debug.Log("I need this object", this);
-            mainCharacter.worldManager.advanceOnTask();
-
             carryingObject = mainCharacter.worldManager.advanceOnTask();
             mainCharacter.changeToExplored();
             transition = "object needed";
@@ -165,37 +160,31 @@ public class MainQuestM : MonoBehaviour
         }
     }
 
-    
 
     private void takeobjecttotheplaceAction()
     {
         Debug.Log("taking this object to the platform", this);
 
-        if (!mainCharacter.playerInfo.hasShovel)
-        {
-            mainCharacter.takeObjectToBombPlatform();
-            if (mainCharacter.destinationReached())
-            {
-                mainCharacter.PrintLabel("Dropping object");
-                Debug.Log("platform reached", this);
 
-                mainCharacter.stopAction();
-                mainCharacter.worldManager.putObjectInPlatform(carryingObject);
-                mainCharacter.objectFound.GetComponent<MeshRenderer>().enabled = false;
-                carryingObject = null;
-                transition = "back to explore";
-            }
-            else
-            {
-                Debug.Log("platfrom not reached", this);
-                transition = "item not placed";
-            }
+        mainCharacter.takeObjectToBombPlatform();
+        if (mainCharacter.destinationReached())
+        {
+            mainCharacter.PrintLabel("Dropping object");
+            Debug.Log("platform reached", this);
+
+            mainCharacter.stopAction();
+            mainCharacter.worldManager.putObjectInPlatform(carryingObject);
+            mainCharacter.objectFound.GetComponent<MeshRenderer>().enabled = false;
+            carryingObject = null;
+            transition = "back to explore";
         }
         else
         {
-            transition = "back to explore";
+            Debug.Log("platfrom not reached", this);
+            transition = "item not placed";
         }
     }
+
 
     private void leaveobjectAction()
     {
@@ -208,7 +197,6 @@ public class MainQuestM : MonoBehaviour
 
     private void waitforthedoortoopenAction()
     {
-        
     }
 
     private void waitingAction()
