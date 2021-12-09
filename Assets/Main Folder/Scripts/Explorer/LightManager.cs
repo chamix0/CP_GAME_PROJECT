@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class LightManager : MonoBehaviour
 {
+    [SerializeField] private CharacterManager mainCharacter;
     private Light luz;
     [SerializeField] private MyTimer timer;
     public PlayerInfo playerInfo;
@@ -14,6 +15,7 @@ public class LightManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+
         luz = GetComponent<Light>();
         timer.setTimer(playerInfo.batteryCapacity);
         timer.start();
@@ -63,20 +65,27 @@ public class LightManager : MonoBehaviour
         timer.start();
     }
 
-    public bool CanDefend()
+    public bool CanDefend(Vector3 ghostPosition)
     {
+        
         timer.takeTime(30);
         if (!(timer.getTimeToFinish() > 0)) return false;
-        StartCoroutine(Flash());
+        StartCoroutine(Flash(ghostPosition));
         return true;
     }
 
-    private IEnumerator Flash()
+    private IEnumerator Flash(Vector3 ghostPosition)
     {
         isFlashing = true;
         luz.intensity = 120.0f;
         luz.color = Color.yellow;
+        var aux = mainCharacter.characterLabel.text;
+        mainCharacter.characterLabel.text = "FLASH!";
+        var oldRotation = transform.rotation;
+        transform.LookAt(ghostPosition);
         yield return new WaitForSeconds(0.5f);
+        transform.rotation = oldRotation;
+        mainCharacter.characterLabel.text = aux;
         luz.intensity = initialIntensity;
         luz.color = initialColor;
         isFlashing = false;

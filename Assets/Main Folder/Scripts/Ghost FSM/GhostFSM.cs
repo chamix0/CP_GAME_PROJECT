@@ -136,7 +136,7 @@ public class GhostFSM : MonoBehaviour
 
     private void TryAttack()
     {
-        _transition = _humanChased.GetComponent<CharacterManager>().lightManager.CanDefend()
+        _transition = _humanChased.GetComponent<CharacterManager>().lightManager.CanDefend(this.transform.position)
             ? humanDefendsItselfPerception
             : humanDoesNotDefendItselfPerception;
     }
