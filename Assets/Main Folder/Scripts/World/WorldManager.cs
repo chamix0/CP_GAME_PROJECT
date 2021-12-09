@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
@@ -47,7 +48,7 @@ public class WorldManager : MonoBehaviour
 
     //players
     private List<CharacterManager> characters;
-    private List<ExplorableObject> neededObjects;
+    [NonSerialized] public List<ExplorableObject> neededObjects;
     private List<chargingPoint> chargingPoints;
 
     #endregion

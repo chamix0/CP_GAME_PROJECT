@@ -264,6 +264,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _name: Explorator
   _budDetectionRange: 6
+  _budResurrectionRange: 15.7
   exploringTimeForEachObject: 3
   _resurrectDuration: 2
   batteryCapacity: 60
@@ -279,7 +280,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d38c5cf991cdcd64fa8a248600fef40b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  PlayerInfo: {fileID: 1086827894087199127}
   characterLabel: {fileID: 7663265994947006082}
   exploreObjectTimer: {fileID: 7594140589109604590}
   objectFound: {fileID: 7333076576172241301}

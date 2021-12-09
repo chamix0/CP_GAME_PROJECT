@@ -79,13 +79,11 @@ public class LightManager : MonoBehaviour
         isFlashing = true;
         luz.intensity = 120.0f;
         luz.color = Color.yellow;
-        var aux = mainCharacter.characterLabel.text;
-        mainCharacter.characterLabel.text = "FLASH!";
+        mainCharacter.PrintLabel("FLASH");
         var oldRotation = transform.rotation;
         transform.LookAt(ghostPosition);
         yield return new WaitForSeconds(0.5f);
         transform.rotation = oldRotation;
-        mainCharacter.characterLabel.text = aux;
         luz.intensity = initialIntensity;
         luz.color = initialColor;
         isFlashing = false;

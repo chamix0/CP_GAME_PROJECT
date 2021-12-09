@@ -81,13 +81,16 @@ public class RootIAManagerFSM : MonoBehaviour
 
     private void UtilitySystemAction()
     {
+        
+        
         //manage defense against the monster
-        if (mainCharacter.PlayerInfo.isDead)
+        if (mainCharacter.playerInfo.isDead)
         {
+            mainQuest.pause();
             transition = "character dies";
         }
         //manage batery
-        else if (mainCharacter.PlayerInfo.needsToRecharge)
+        else if (mainCharacter.playerInfo.needsToRecharge)
         {
             mainQuest.pause();
             if (!currentChargingPoint)
@@ -114,13 +117,24 @@ public class RootIAManagerFSM : MonoBehaviour
                 _currentDeadBuddy = mainCharacter.GoToDeadBuddy();
 
             if (mainCharacter.destinationReached())
-                StartCoroutine(ResurrectBud(_currentDeadBuddy));
+            {
+                mainCharacter.stopAction();
+                _currentDeadBuddy.Resurrect();
+                mainCharacter.restoreDestination();
+                
+                mainCharacter.isResurrectingBuddy = false;
+                mainCharacter.deadBuddy = null;
+                _currentDeadBuddy = null;
+                mainCharacter.PrintLabel("No problem!");
+            }
+                
             transition = "keep doing things";
         }
 
         //main quest
         else
         {
+            mainCharacter.checkOnBud();
             mainQuest.unPause();
             transition = "keep doing things";
         }
@@ -128,18 +142,18 @@ public class RootIAManagerFSM : MonoBehaviour
 
     private void DeadAction()
     {
-        mainCharacter.characterLabel.text = "I'm Dead";
-        if (mainCharacter.PlayerInfo.isDead)
+        mainCharacter.PrintLabelBig("I'm Dead");
+        if (mainCharacter.playerInfo.isDead)
         {
             mainCharacter.SetAgentSpeed(0.0f);
-            mainQuest.pause();
+            //mainQuest.pause();
             transition = "still dead";
         }
         else
         {
             mainCharacter.SetAgentSpeed(mainCharacter.speed);
-            mainQuest.unPause();
-            mainCharacter.characterLabel.text = "Thanks! Back to explore";
+            //mainQuest.unPause();
+            mainCharacter.PrintLabel("Thanks! Back to explore");
             transition = "character resurrect";
         }
     }
@@ -148,14 +162,5 @@ public class RootIAManagerFSM : MonoBehaviour
     {
     }
 
-    private IEnumerator ResurrectBud(PlayerInfo playerInfo)
-    {
-        yield return new WaitForSeconds(playerInfo._resurrectDuration);
-        playerInfo.Resurrect();
-        mainCharacter.restoreDestination();
-        mainCharacter.isResurrectingBuddy = false;
-        mainCharacter.deadBuddy = null;
-        _currentDeadBuddy = null;
-        mainCharacter.characterLabel.text = "Back to explore";
-    }
+    
 }

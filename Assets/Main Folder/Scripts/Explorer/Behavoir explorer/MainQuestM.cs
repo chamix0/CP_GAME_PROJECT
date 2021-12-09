@@ -121,12 +121,13 @@ public class MainQuestM : MonoBehaviour
     // Create your desired actions
     private void lookingforanobjectAction()
     {
-        mainCharacter.checkOnBud();
+        //mainCharacter.checkOnBud();
         if (mainCharacter.worldManager.getAllItemsFound())
         {
-            Debug.Log("no more places to look", this);
+            mainCharacter.PrintLabel("no more places to look");
+            //Debug.Log("no more places to look", this);
             transition = "no more places to look";
-            if (mainCharacter.PlayerInfo.hasShovel)
+            if (mainCharacter.playerInfo.hasShovel)
             {
                 exploring();
                 if (mainCharacter.worldManager.getAllItemsPlaced())
@@ -144,30 +145,35 @@ public class MainQuestM : MonoBehaviour
         {
             if (mainCharacter.currentTarget == mainCharacter.worldManager.getShovel())
             {
-                mainCharacter.PlayerInfo.hasShovel = true;
+                mainCharacter.playerInfo.hasShovel = true;
             }
 
-            Debug.Log("I need this object", this);
+            mainCharacter.PrintLabel("I need this object");
+            //Debug.Log("I need this object", this);
             mainCharacter.worldManager.advanceOnTask();
             mainCharacter.changeToExplored();
             transition = "object needed";
         }
         else
         {
-            Debug.Log("I dont need this object", this);
+            mainCharacter.PrintLabel("I dont need this object now");
+            //Debug.Log("I dont need this object", this);
             transition = "object not needed";
         }
     }
+
+    
 
     private void takeobjecttotheplaceAction()
     {
         Debug.Log("taking this object to the platform", this);
 
-        if (mainCharacter.worldManager.getCurrentTask() != mainCharacter.worldManager.getGraveyardItem())
+        if (!mainCharacter.playerInfo.hasShovel)
         {
             mainCharacter.takeObjectToBombPlatform();
             if (mainCharacter.destinationReached())
             {
+                mainCharacter.PrintLabel("Dropping object");
                 Debug.Log("platform reached", this);
                 mainCharacter.stopAction();
                 mainCharacter.objectFound.GetComponent<MeshRenderer>().enabled = false;
@@ -187,7 +193,8 @@ public class MainQuestM : MonoBehaviour
 
     private void leaveobjectAction()
     {
-        Debug.Log("I might need this object later", this);
+        //mainCharacter.PrintLabel("I might need this object later");
+        //Debug.Log("I might need this object later", this);
         mainCharacter.addObjectTocontainsAnObjectList();
         mainCharacter.changeToExplored();
         transition = "go back to explore";
@@ -195,6 +202,7 @@ public class MainQuestM : MonoBehaviour
 
     private void waitforthedoortoopenAction()
     {
+        
     }
 
     private void waitingAction()
@@ -229,12 +237,14 @@ public class MainQuestM : MonoBehaviour
     {
         if (mainCharacter.iKnowWhereThatObjectIs())
         {
-            Debug.Log("i know where that object is!!!", this);
+            mainCharacter.PrintLabel("I remember that!");
+            //Debug.Log("i know where that object is!!!", this);
             mainCharacter.goToObjectIknow();
             if (mainCharacter.destinationReached())
             {
                 mainCharacter.stopAction();
-                Debug.Log("object found", this);
+                mainCharacter.PrintLabel("Object found");
+                //Debug.Log("object found", this);
                 transition = "there is object";
             }
             else
@@ -247,10 +257,12 @@ public class MainQuestM : MonoBehaviour
         {
             if (mainCharacter.findRandomExplorablePlace())
             {
+                mainCharacter.PrintLabelBig("Exploring");
                 checkArrival();
             }
             else
             {
+                mainCharacter.PrintLabel("No more places to look");
                 Debug.Log("no more places to look", this);
                 transition = "no more places to look";
             }
@@ -262,13 +274,16 @@ public class MainQuestM : MonoBehaviour
         if (mainCharacter.destinationReached())
         {
             mainCharacter.stopAction();
+            mainCharacter.PrintLabel("Searching...");
             if (mainCharacter.currentTarget.getContainsObject())
             {
+                mainCharacter.PrintLabel("Object found");
                 Debug.Log("object found!!!!", this);
                 transition = "there is object";
             }
             else
             {
+                mainCharacter.PrintLabel("Nothing here");
                 Debug.Log("this place doesnt contain anything", this);
                 mainCharacter.changeToExplored();
                 transition = "keep exploring";

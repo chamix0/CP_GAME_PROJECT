@@ -43,10 +43,12 @@ public class GhostFSM : MonoBehaviour
     [SerializeField] private Text _text;
 
     [Range(1.0f, 5.0f)] [SerializeField] private float _distanceToAttack;
-    
+
     [Range(1.0f, 5.0f)] [SerializeField] private int _attackDuration;
-    
+
     [Range(1.0f, 10f)] [SerializeField] private float _movementSpeed;
+
+    [SerializeField] private Transform cementeryPosition;
 
     #endregion variables
 
@@ -119,8 +121,10 @@ public class GhostFSM : MonoBehaviour
                 _transition = keepChasingPerception;
             else
                 TryAttack();
-        } else if (IsRunningAway() && HasReachedDestination())
+        }
+        else if (IsRunningAway() && HasReachedDestination())
         {
+            _navMeshAgent.speed /= 1.5f;
             _transition = ghostHasEscapedPerception;
             _attacked = false;
         }
@@ -182,9 +186,10 @@ public class GhostFSM : MonoBehaviour
     private void AttackAction()
     {
         _text.text = "Attacking Human";
-        //_transition = humanDiedPerception;
         StartCoroutine(Attack(_attackDuration));
-        _transition = null;
+
+        if (!_transition.Equals(humanDiedPerception))
+            _transition = null;
     }
 
     private void RunAwayAction()
@@ -192,20 +197,23 @@ public class GhostFSM : MonoBehaviour
         _text.text = "Running Away";
         _attacked = true;
 
-        var farthestDestination = transform.position;
-        foreach (var destination in destinations)
-        {
-            if (Vector3.Distance(transform.position, destination.position) >
-                Vector3.Distance(transform.position, farthestDestination))
-                farthestDestination = destination.position;
-        }
-
-        destination = farthestDestination;
+        // var farthestDestination = transform.position;
+        // foreach (var destination in destinations)
+        // {
+        //     if (Vector3.Distance(transform.position, destination.position) >
+        //         Vector3.Distance(transform.position, farthestDestination))
+        //         farthestDestination = destination.position;
+        // }
+        //
+        // destination = farthestDestination;
+        destination = cementeryPosition.position;
+        
         _navMeshAgent.SetDestination(destination);
+        _navMeshAgent.speed *= 1.5f;
         _transition = null;
     }
 
-    private void OnTriggerStay(Collider other)
+    private void OnTriggerEnter(Collider other)
     {
         if (_attacked || !other.gameObject.tag.Equals("Player")) return;
         if (other.gameObject.GetComponent<PlayerInfo>().isDead) return;

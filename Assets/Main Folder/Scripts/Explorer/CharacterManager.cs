@@ -15,7 +15,7 @@ public class CharacterManager : MonoBehaviour
     #region VARIABLES
 
     //public
-    public PlayerInfo PlayerInfo;
+    [NonSerialized] public PlayerInfo playerInfo;
     public Text characterLabel;
     public MyTimer exploreObjectTimer;
     public GameObject objectFound;
@@ -25,7 +25,7 @@ public class CharacterManager : MonoBehaviour
 
     //private
     // private float updatingCooldown = 20;
-    
+    private Queue<string> _labelQueue;
     private List<ExplorableObject> explorablePlaces;
     private List<ExplorableObject> exploredPlaces;
     private List<ExplorableObject> containsAnObjectPlaces;
@@ -38,13 +38,14 @@ public class CharacterManager : MonoBehaviour
     [SerializeField] private GameObject waitingPositionObject;
     [SerializeField] public WorldManager worldManager;
     [SerializeField] public LightManager lightManager;
-    
 
     #endregion
 
     private void Awake()
     {
-        UnityEngine.Random.InitState((int) System.DateTime.Now.Ticks);
+        playerInfo = GetComponent<PlayerInfo>();
+        UnityEngine.Random.InitState((int)System.DateTime.Now.Ticks);
+        _labelQueue = new Queue<string>();
         budsList = new List<CharacterManager>();
         explorablePlaces = new List<ExplorableObject>();
         exploredPlaces = new List<ExplorableObject>();
@@ -57,13 +58,12 @@ public class CharacterManager : MonoBehaviour
         _currentDestination = transform.position;
         waitingPosition = waitingPositionObject.transform.position;
         currentTarget = null;
-        characterLabel.text = PlayerInfo._name;
 
 
         //object found disable
         objectFound.GetComponent<MeshRenderer>().enabled = false;
 
-        exploreObjectTimer.setTimer(PlayerInfo.exploringTimeForEachObject);
+        exploreObjectTimer.setTimer(playerInfo.exploringTimeForEachObject);
         setPlayers();
     }
 
@@ -74,23 +74,35 @@ public class CharacterManager : MonoBehaviour
         destinationStillIsUnexplored();
     }
 
+    private void FixedUpdate()
+    {
+        // if (Time.frameCount % 60 == 0)
+        //     characterLabel.text = _labelQueue.Dequeue();
+
+        // if (Time.fixedTime % 1f == 0.0f)
+        //     characterLabel.text = _labelQueue.Dequeue();
+    }
+
     #region ACTIONS
 
     public void goToWaitingPoint()
     {
+        PrintLabelBig("Waiting");
         setDestination(waitingPosition, null);
     }
 
     public chargingPoint goToRechargePoint()
     {
+        PrintLabel("I need to recharge");
         destinationBuffer = _currentDestination;
         chargingPoint aux = worldManager.getNearestChargingPoint(this.transform.position);
         setDestination(aux.transform.position);
         return aux;
     }
-    
+
     public PlayerInfo GoToDeadBuddy()
     {
+        PrintLabel("I need to save my bud");
         destinationBuffer = _currentDestination;
         setDestination(deadBuddy.transform.position);
         return deadBuddy;
@@ -104,6 +116,7 @@ public class CharacterManager : MonoBehaviour
 
     public void rechargeBattery()
     {
+        PrintLabel("Recharging");
         lightManager.chargeBattery();
     }
 
@@ -118,21 +131,21 @@ public class CharacterManager : MonoBehaviour
         {
             if (explorablePlaces.Contains(worldManager.getBook()))
             {
-                characterLabel.text = "Searching recipe book";
+                PrintLabel("Searching recipe book");
                 setDestination(worldManager.getBook().getPosition(), worldManager.getBook());
                 return true;
             }
 
             if (explorablePlaces.Contains(worldManager.getShovel()))
             {
-                characterLabel.text = "Searching shovel";
+                PrintLabel("Searching shovel");
                 setDestination(worldManager.getShovel().getPosition(), worldManager.getShovel());
                 return true;
             }
 
             if (explorablePlaces.Count > 0)
             {
-                characterLabel.text = "Searching random object";
+                PrintLabel("Where should I look...");
                 ExplorableObject aux = explorablePlaces[UnityEngine.Random.Range(0, explorablePlaces.Count - 1)];
                 setDestination(aux.getPosition(), aux);
                 return true;
@@ -168,7 +181,7 @@ public class CharacterManager : MonoBehaviour
 
     public void takeObjectToBombPlatform()
     {
-        characterLabel.text = "Taking object to front door";
+        PrintLabelBig("Taking object to front door");
         setDestination(worldManager.getPlatformPosition());
         objectFound.GetComponent<MeshRenderer>().enabled = true;
     }
@@ -247,12 +260,21 @@ public class CharacterManager : MonoBehaviour
         foreach (CharacterManager c in budsList)
         {
             if (Vector3.Distance(this.transform.position, c.transform.position) <
-                PlayerInfo._budDetectionRange)
+                playerInfo._budResurrectionRange)
             {
+                CheckDeadBud(c);
+            }
+            
+            if (Vector3.Distance(this.transform.position, c.transform.position) <
+                playerInfo._budDetectionRange)
+            {
+
+                bool aux = false;
                 foreach (ExplorableObject explored in c.exploredPlaces)
                 {
                     if (!exploredPlaces.Contains(explored))
                     {
+                        aux = true;
                         explorablePlaces.Remove(explored);
                         containsAnObjectPlaces.Remove(explored);
                         exploredPlaces.Add(explored);
@@ -263,17 +285,24 @@ public class CharacterManager : MonoBehaviour
                 {
                     if (!containsAnObjectPlaces.Contains(knownPlace))
                     {
+                        aux = true;
                         containsAnObjectPlaces.Add(knownPlace);
                     }
                 }
 
-                if (c.PlayerInfo.isDead)
-                {
-                    characterLabel.text = "Resurrecting buddy";
-                    isResurrectingBuddy = true;
-                    deadBuddy = c.PlayerInfo;
-                }
+                if (aux)
+                    PrintLabel("Sharing info");
             }
+        }
+    }
+
+    private void CheckDeadBud(CharacterManager c)
+    {
+        if (c.playerInfo.isDead)
+        {
+            PrintLabel("Resurrecting buddy");
+            isResurrectingBuddy = true;
+            deadBuddy = c.playerInfo;
         }
     }
 
@@ -319,7 +348,7 @@ public class CharacterManager : MonoBehaviour
             {
                 currentTarget.turnOffMesh();
             }
-    
+
             return true;
         }
 
@@ -345,6 +374,34 @@ public class CharacterManager : MonoBehaviour
     {
         agent.speed = speed;
     }
-    
-    
+
+    public void PrintLabel(string label)
+    {
+        if (_labelQueue.Contains(label)) return;
+        _labelQueue.Enqueue(label);
+        if (isPrinting) return;
+        StartCoroutine(PrintLabelCoroutine());
+    }
+
+    private bool isPrinting;
+
+    public void PrintLabelBig(string label)
+    {
+        if (isPrinting) return;
+        if (characterLabel.text.Equals(label)) return;
+        characterLabel.text = label;
+    }
+
+    private IEnumerator PrintLabelCoroutine()
+    {
+        isPrinting = true;
+
+        while (_labelQueue.Count != 0)
+        {
+            characterLabel.text = _labelQueue.Dequeue();
+            yield return new WaitForSeconds(1f);
+        }
+
+        isPrinting = false;
+    }
 }
