@@ -50,6 +50,10 @@ public class GhostFSM : MonoBehaviour
 
     [SerializeField] private Transform cementeryPosition;
 
+    [SerializeField] private SkinnedMeshRenderer _meshrenderer;
+
+    [SerializeField] private List<Material> materials;
+
     #endregion variables
 
     private void Awake()
@@ -170,6 +174,7 @@ public class GhostFSM : MonoBehaviour
 
     private void WanderAroundAction()
     {
+        ChangeGhostColor(0);
         _text.text = "Wandering Around";
         destination = destinations[_random.Next(destinations.Count)].position;
         _navMeshAgent.SetDestination(destination);
@@ -178,6 +183,7 @@ public class GhostFSM : MonoBehaviour
 
     private void ChaseHumanAction()
     {
+        ChangeGhostColor(2);
         _text.text = "Chasing Human";
         _navMeshAgent.SetDestination(_humanChased.position);
         _transition = null;
@@ -194,6 +200,7 @@ public class GhostFSM : MonoBehaviour
 
     private void RunAwayAction()
     {
+        ChangeGhostColor(1);
         _text.text = "Running Away";
         _attacked = true;
 
@@ -228,5 +235,10 @@ public class GhostFSM : MonoBehaviour
         yield return new WaitForSeconds(seconds);
         _navMeshAgent.speed = _movementSpeed;
         _transition = humanDiedPerception;
+    }
+    
+    private void ChangeGhostColor(int i)
+    {
+        _meshrenderer.material = materials[i];
     }
 }

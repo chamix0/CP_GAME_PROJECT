@@ -29,6 +29,9 @@ public class RootIAManagerFSM : MonoBehaviour
     private PlayerInfo _currentDeadBuddy;
 
     private bool _ghostWin;
+
+    [SerializeField] private GameObject _explosion;
+    [SerializeField] private Transform _explosionPos;
     
     private MainQuestM mainQuest;
     private CharacterManager mainCharacter;
@@ -183,6 +186,17 @@ public class RootIAManagerFSM : MonoBehaviour
     {
         if (_ghostWin)
             SceneManager.LoadScene("Lose Scene");
+        
+        var gameObject = Instantiate(_explosion, _explosionPos.position, Quaternion.identity);
+        gameObject.transform.localScale = new Vector3(6, 6, 6);
+
+        StartCoroutine(FinishCoroutine());
+    }
+
+    private IEnumerator FinishCoroutine()
+    {
+        yield return new WaitForSeconds(3);
+        
         SceneManager.LoadScene("Win Scene");
     }
 
