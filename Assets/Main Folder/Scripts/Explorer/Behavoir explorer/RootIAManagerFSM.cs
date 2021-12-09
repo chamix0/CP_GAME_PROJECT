@@ -23,6 +23,8 @@ public class RootIAManagerFSM : MonoBehaviour
     #endregion variables
 
     //Place your variables here
+    private PlayerInfo _currentDeadBuddy;
+
     private MainQuestM mainQuest;
     private CharacterManager mainCharacter;
     private String transition;
@@ -105,6 +107,16 @@ public class RootIAManagerFSM : MonoBehaviour
 
             transition = "keep doing things";
         }
+        else if (mainCharacter.isResurrectingBuddy)
+        {
+            mainQuest.pause();
+            if (!_currentDeadBuddy)
+                _currentDeadBuddy = mainCharacter.GoToDeadBuddy();
+
+            if (mainCharacter.destinationReached())
+                StartCoroutine(ResurrectBud(_currentDeadBuddy));
+            transition = "keep doing things";
+        }
 
         //main quest
         else
@@ -116,6 +128,7 @@ public class RootIAManagerFSM : MonoBehaviour
 
     private void DeadAction()
     {
+        mainCharacter.characterLabel.text = "I'm Dead";
         if (mainCharacter.PlayerInfo.isDead)
         {
             mainCharacter.SetAgentSpeed(0.0f);
@@ -126,11 +139,23 @@ public class RootIAManagerFSM : MonoBehaviour
         {
             mainCharacter.SetAgentSpeed(mainCharacter.speed);
             mainQuest.unPause();
+            mainCharacter.characterLabel.text = "Thanks! Back to explore";
             transition = "character resurrect";
         }
     }
 
     private void FinishgameAction()
     {
+    }
+
+    private IEnumerator ResurrectBud(PlayerInfo playerInfo)
+    {
+        yield return new WaitForSeconds(playerInfo._resurrectDuration);
+        playerInfo.Resurrect();
+        mainCharacter.restoreDestination();
+        mainCharacter.isResurrectingBuddy = false;
+        mainCharacter.deadBuddy = null;
+        _currentDeadBuddy = null;
+        mainCharacter.characterLabel.text = "Back to explore";
     }
 }

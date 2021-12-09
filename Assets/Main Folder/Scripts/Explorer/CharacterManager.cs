@@ -20,9 +20,12 @@ public class CharacterManager : MonoBehaviour
     public MyTimer exploreObjectTimer;
     public GameObject objectFound;
     public float speed = 3;
+    [NonSerialized] public bool isResurrectingBuddy;
+    [NonSerialized] public PlayerInfo deadBuddy;
 
     //private
     // private float updatingCooldown = 20;
+    
     private List<ExplorableObject> explorablePlaces;
     private List<ExplorableObject> exploredPlaces;
     private List<ExplorableObject> containsAnObjectPlaces;
@@ -85,6 +88,13 @@ public class CharacterManager : MonoBehaviour
         setDestination(aux.transform.position);
         return aux;
     }
+    
+    public PlayerInfo GoToDeadBuddy()
+    {
+        destinationBuffer = _currentDestination;
+        setDestination(deadBuddy.transform.position);
+        return deadBuddy;
+    }
 
     public void restoreDestination()
     {
@@ -108,18 +118,21 @@ public class CharacterManager : MonoBehaviour
         {
             if (explorablePlaces.Contains(worldManager.getBook()))
             {
+                characterLabel.text = "Searching recipe book";
                 setDestination(worldManager.getBook().getPosition(), worldManager.getBook());
                 return true;
             }
 
             if (explorablePlaces.Contains(worldManager.getShovel()))
             {
+                characterLabel.text = "Searching shovel";
                 setDestination(worldManager.getShovel().getPosition(), worldManager.getShovel());
                 return true;
             }
 
             if (explorablePlaces.Count > 0)
             {
+                characterLabel.text = "Searching random object";
                 ExplorableObject aux = explorablePlaces[UnityEngine.Random.Range(0, explorablePlaces.Count - 1)];
                 setDestination(aux.getPosition(), aux);
                 return true;
@@ -155,6 +168,7 @@ public class CharacterManager : MonoBehaviour
 
     public void takeObjectToBombPlatform()
     {
+        characterLabel.text = "Taking object to front door";
         setDestination(worldManager.getPlatformPosition());
         objectFound.GetComponent<MeshRenderer>().enabled = true;
     }
@@ -178,12 +192,12 @@ public class CharacterManager : MonoBehaviour
     {
         if (exploreObjectTimer.pausedTimer())
         {
-            characterLabel.text = "aaaaaaaaaaa";
+            //characterLabel.text = "aaaaaaaaaaa";
             agent.speed = speed;
             return true;
         }
 
-        characterLabel.text = "doing something...";
+        //characterLabel.text = "doing something...";
         agent.speed = 0;
         return false;
     }
@@ -228,7 +242,7 @@ public class CharacterManager : MonoBehaviour
         return Vector3.Distance(transform.position, _currentDestination);
     }
 
-    public bool checkOnBud()
+    public void checkOnBud()
     {
         foreach (CharacterManager c in budsList)
         {
@@ -255,14 +269,12 @@ public class CharacterManager : MonoBehaviour
 
                 if (c.PlayerInfo.isDead)
                 {
-                    StartCoroutine(ResurrectBud(c.PlayerInfo));
-                    c.PlayerInfo.Resurrect();
-                    return true;
+                    characterLabel.text = "Resurrecting buddy";
+                    isResurrectingBuddy = true;
+                    deadBuddy = c.PlayerInfo;
                 }
             }
         }
-
-        return false;
     }
 
 
@@ -293,7 +305,6 @@ public class CharacterManager : MonoBehaviour
             {
                 if (containsAnObjectPlaces.Remove(c))
                 {
-                    agent.speed = speed;
                     setDestination(transform.position, null);
                 }
             }
@@ -308,7 +319,7 @@ public class CharacterManager : MonoBehaviour
             {
                 currentTarget.turnOffMesh();
             }
-
+    
             return true;
         }
 
@@ -335,11 +346,5 @@ public class CharacterManager : MonoBehaviour
         agent.speed = speed;
     }
     
-    private IEnumerator ResurrectBud(PlayerInfo playerInfo)
-    {
-        agent.speed = 0.0f;
-        yield return new WaitForSeconds(playerInfo._resurrectDuration);
-        playerInfo.Resurrect();
-        agent.speed = speed;
-    }
+    
 }
