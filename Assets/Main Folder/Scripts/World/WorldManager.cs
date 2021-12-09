@@ -82,8 +82,9 @@ public class WorldManager : MonoBehaviour
         printTasks();
     }
 
-    public void advanceOnTask()
+    public ExplorableObject advanceOnTask()
     {
+        ExplorableObject aux = getCurrentTask();
         phase++;
 
         if (phase == 6)
@@ -103,6 +104,7 @@ public class WorldManager : MonoBehaviour
         }
 
         printTasks();
+        return aux;
     }
 
     public bool getAllItemsFound()
@@ -136,6 +138,10 @@ public class WorldManager : MonoBehaviour
         tasks.text = "\n" + tas;
     }
 
+    public void putObjectInPlatform(ExplorableObject explorableObject)
+    {
+        platform.putObject(explorableObject);
+    }
     public ExplorableObject getCurrentTask()
     {
         return neededObjects[phase % neededObjects.Count];
