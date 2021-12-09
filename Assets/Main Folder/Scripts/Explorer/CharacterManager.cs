@@ -29,7 +29,7 @@ public class CharacterManager : MonoBehaviour
     private List<ExplorableObject> explorablePlaces;
     private List<ExplorableObject> exploredPlaces;
     private List<ExplorableObject> containsAnObjectPlaces;
-    private List<CharacterManager> budsList;
+    [NonSerialized] public List<CharacterManager> budsList;
     private Vector3 _currentDestination;
     private Vector3 waitingPosition;
     [NonSerialized] public ExplorableObject currentTarget;

@@ -1,8 +1,11 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
+using UnityEditor.SearchService;
 using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine.SceneManagement;
 
 public class RootIAManagerFSM : MonoBehaviour
 {
@@ -25,6 +28,8 @@ public class RootIAManagerFSM : MonoBehaviour
     //Place your variables here
     private PlayerInfo _currentDeadBuddy;
 
+    private bool _ghostWin;
+    
     private MainQuestM mainQuest;
     private CharacterManager mainCharacter;
     private String transition;
@@ -33,6 +38,8 @@ public class RootIAManagerFSM : MonoBehaviour
     // Start is called before the first frame update
     private void Start()
     {
+        _ghostWin = false;
+        
         RootIAManagerFSM_FSM = new StateMachineEngine(false);
 
         mainQuest = GetComponent<MainQuestM>();
@@ -74,6 +81,7 @@ public class RootIAManagerFSM : MonoBehaviour
     private void Update()
     {
         RootIAManagerFSM_FSM.Update();
+        
         RootIAManagerFSM_FSM.Fire(transition);
     }
 
@@ -87,6 +95,15 @@ public class RootIAManagerFSM : MonoBehaviour
         if (mainCharacter.playerInfo.isDead)
         {
             mainQuest.pause();
+
+            var deaths = 1 + mainCharacter.budsList.Count(bud => bud.playerInfo.isDead);
+
+            if (deaths == mainCharacter.budsList.Count)
+            {
+                transition = "game finished";
+                _ghostWin = true;
+            }
+
             transition = "character dies";
         }
         //manage batery
@@ -130,6 +147,10 @@ public class RootIAManagerFSM : MonoBehaviour
                 
             transition = "keep doing things";
         }
+        else if (mainCharacter.worldManager.getAllItemsPlaced())
+        {
+            transition = "game finished";
+        }
 
         //main quest
         else
@@ -160,6 +181,9 @@ public class RootIAManagerFSM : MonoBehaviour
 
     private void FinishgameAction()
     {
+        if (_ghostWin)
+            SceneManager.LoadScene("Lose Scene");
+        SceneManager.LoadScene("Win Scene");
     }
 
     

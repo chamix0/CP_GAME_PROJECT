@@ -3,16 +3,11 @@
   <component name="ChangeListManager">
     <list default="true" id="d4d320ca-14cb-44f5-82e9-b498f08c2bbc" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.CP_GAME_PROJECT/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.CP_GAME_PROJECT/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Main Folder/Prefabs/Explorer (3).prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Main Folder/Prefabs/Explorer (3).prefab" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Main Folder/Prefabs/Ghost.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Main Folder/Prefabs/Ghost.prefab" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Main Folder/Scripts/Explorer/Behavoir explorer/MainQuestM.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Main Folder/Scripts/Explorer/Behavoir explorer/MainQuestM.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Main Folder/Scenes/house.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Main Folder/Scenes/house.unity" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Main Folder/Scripts/Explorer/Behavoir explorer/RootIAManagerFSM.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Main Folder/Scripts/Explorer/Behavoir explorer/RootIAManagerFSM.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Main Folder/Scripts/Explorer/CharacterManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Main Folder/Scripts/Explorer/CharacterManager.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Main Folder/Scripts/Explorer/LightManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Main Folder/Scripts/Explorer/LightManager.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Main Folder/Scripts/Explorer/PlayerInfo.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Main Folder/Scripts/Explorer/PlayerInfo.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Main Folder/Scripts/Ghost FSM/GhostFSM.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Main Folder/Scripts/Ghost FSM/GhostFSM.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Main Folder/Scripts/World/WorldManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Main Folder/Scripts/World/WorldManager.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ProjectSettings/Packages/com.unity.probuilder/Settings.json" beforeDir="false" afterPath="$PROJECT_DIR$/ProjectSettings/Packages/com.unity.probuilder/Settings.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ProjectSettings/EditorBuildSettings.asset" beforeDir="false" afterPath="$PROJECT_DIR$/ProjectSettings/EditorBuildSettings.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/UserSettings/EditorUserSettings.asset" beforeDir="false" afterPath="$PROJECT_DIR$/UserSettings/EditorUserSettings.asset" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -36,6 +31,7 @@
     <setting file="file://$PROJECT_DIR$/Assets/Demo/FSM demo/Scripts/ChickenFSM.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Main Folder/Scripts/World/ExplorableObject.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Main Folder/Scripts/World/WorldManager.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Main Folder/Scripts/Results.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Main Folder/Scripts/Explorer/CharacterManager.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Main Folder/Scripts/utils/TextFollowPlayer.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Main Folder/Scripts/Explorer/LightManager.cs" root0="FORCE_HIGHLIGHTING" />
