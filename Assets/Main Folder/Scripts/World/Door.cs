@@ -11,6 +11,7 @@ public class Door : MonoBehaviour
     private void Start()
     {
         openDoor = false;
+        
     }
 
     // Update is called once per frame
@@ -20,6 +21,7 @@ public class Door : MonoBehaviour
         {
             Vector3 to = new Vector3(0,90 , 0);
             transform.eulerAngles = Vector3.Lerp(transform.rotation.eulerAngles, to, Time.deltaTime);
+            
         }
     }
 

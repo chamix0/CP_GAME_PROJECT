@@ -170,6 +170,8 @@ public class MainQuestM : MonoBehaviour
         if (mainCharacter.destinationReached())
         {
             mainCharacter.PrintLabel("Dropping object");
+            if (mainCharacter.worldManager.phase == 8)
+                mainCharacter.worldManager.advanceOnTask();
             Debug.Log("platform reached", this);
 
             mainCharacter.stopAction();

@@ -40,7 +40,7 @@ public class WorldManager : MonoBehaviour
     private ExplorableObject graveYardItem;
     private ExplorableObject shovel;
     private int index;
-    private int phase;
+    public int phase;
 
     //patform where the bomb goes
     public Platform platform;
@@ -88,20 +88,18 @@ public class WorldManager : MonoBehaviour
         ExplorableObject aux = getCurrentTask();
         phase++;
 
-        if (phase == 6)
+        switch (phase)
         {
-            door.openTheDoor();
-            pushAnObjectToPlayers(shovel);
-        }
-
-        if (phase == 7)
-        {
-            allItemsFound = true;
-        }
-
-        if (phase > 7)
-        {
-            allItemsPlaced = true;
+            case 6:
+                door.openTheDoor();
+                pushAnObjectToPlayers(shovel);
+                break;
+            case 7:
+                allItemsFound = true;
+                break;
+            case 9:
+                allItemsPlaced = true;
+                break;
         }
 
         printTasks();

@@ -2,27 +2,12 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="d4d320ca-14cb-44f5-82e9-b498f08c2bbc" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.CP_GAME_PROJECT/.idea/indexLayout.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.CP_GAME_PROJECT/.idea/indexLayout.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.CP_GAME_PROJECT/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.CP_GAME_PROJECT/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Main Folder/Prefabs/Explorer (3).prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Main Folder/Prefabs/Explorer (3).prefab" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Main Folder/Prefabs/Ghost.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Main Folder/Prefabs/Ghost.prefab" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Main Folder/Scenes/house.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Main Folder/Scenes/house.unity" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Main Folder/Scripts/Explorer/Behavoir explorer/MainQuestM.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Main Folder/Scripts/Explorer/Behavoir explorer/MainQuestM.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Main Folder/Scripts/Explorer/Behavoir explorer/RootIAManagerFSM.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Main Folder/Scripts/Explorer/Behavoir explorer/RootIAManagerFSM.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Main Folder/Scripts/Ghost FSM/GhostFSM.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Main Folder/Scripts/Ghost FSM/GhostFSM.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/True Explosions/System/Materials/Fireball.mat" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/True Explosions/System/Materials/Fireball.mat" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/True Explosions/System/Materials/Shokwave.mat" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/True Explosions/System/Materials/Shokwave.mat" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/True Explosions/System/Materials/Smoke.mat" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/True Explosions/System/Materials/Smoke.mat" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/True Explosions/System/Materials/VolumeExplosion.mat" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/True Explosions/System/Materials/VolumeExplosion.mat" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/True Explosions/System/Prefabs/Explosion.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/True Explosions/System/Prefabs/Explosion.prefab" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/True Explosions/System/Prefabs/Explosion2D.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/True Explosions/System/Prefabs/Explosion2D.prefab" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/True Explosions/System/Prefabs/Point light.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/True Explosions/System/Prefabs/Point light.prefab" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/True Explosions/System/Prefabs/SampleParticleSystem.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/True Explosions/System/Prefabs/SampleParticleSystem.prefab" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/True Explosions/System/Prefabs/Volumetric.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/True Explosions/System/Prefabs/Volumetric.prefab" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/True Explosions/System/Scripts/effects/PseudoVolumetricExplosion.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/True Explosions/System/Scripts/effects/PseudoVolumetricExplosion.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/True Explosions/System/Scripts/effects/exploderComponents/VolumetricComponent.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/True Explosions/System/Scripts/effects/exploderComponents/VolumetricComponent.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/True Explosions/System/Scripts/effects/exploderComponents/VolumetricComponent2D.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/True Explosions/System/Scripts/effects/exploderComponents/VolumetricComponent2D.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/True Explosions/System/Scripts/exploders/Exploder.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/True Explosions/System/Scripts/exploders/Exploder.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/True Explosions/System/Scripts/exploders/Exploder2D.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/True Explosions/System/Scripts/exploders/Exploder2D.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/True Explosions/System/Scripts/exploders/SphereExploder.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/True Explosions/System/Scripts/exploders/SphereExploder.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Main Folder/Scripts/World/Door.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Main Folder/Scripts/World/Door.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Main Folder/Scripts/World/WorldManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Main Folder/Scripts/World/WorldManager.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/UserSettings/EditorUserSettings.asset" beforeDir="false" afterPath="$PROJECT_DIR$/UserSettings/EditorUserSettings.asset" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />

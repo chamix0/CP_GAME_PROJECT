@@ -188,7 +188,7 @@ public class RootIAManagerFSM : MonoBehaviour
             SceneManager.LoadScene("Lose Scene");
         
         var gameObject = Instantiate(_explosion, _explosionPos.position, Quaternion.identity);
-        gameObject.transform.localScale = new Vector3(6, 6, 6);
+        gameObject.transform.localScale = new Vector3(7f,7f,7f);
 
         StartCoroutine(FinishCoroutine());
     }
