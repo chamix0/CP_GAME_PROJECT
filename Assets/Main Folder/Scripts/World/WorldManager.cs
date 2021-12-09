@@ -39,7 +39,7 @@ public class WorldManager : MonoBehaviour
     private ExplorableObject book;
     private ExplorableObject graveYardItem;
     private ExplorableObject shovel;
-
+    private int index;
     private int phase;
 
     //patform where the bomb goes
@@ -57,6 +57,7 @@ public class WorldManager : MonoBehaviour
     {
         UnityEngine.Random.InitState((int) System.DateTime.Now.Ticks);
         phase = 0;
+        index = 0;
         allObjects = new List<ExplorableObject>();
         livingRoomObjects = new List<ExplorableObject>();
         roomObjects = new List<ExplorableObject>();
@@ -140,8 +141,11 @@ public class WorldManager : MonoBehaviour
 
     public void putObjectInPlatform(ExplorableObject explorableObject)
     {
-        platform.putObject(explorableObject);
+        ExplorableObject aux = neededObjects[index%neededObjects.Count];
+        index++;
+        platform.putObject(aux);
     }
+
     public ExplorableObject getCurrentTask()
     {
         return neededObjects[phase % neededObjects.Count];
