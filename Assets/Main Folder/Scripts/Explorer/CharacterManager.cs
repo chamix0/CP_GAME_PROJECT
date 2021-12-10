@@ -36,7 +36,7 @@ public class CharacterManager : MonoBehaviour
     private NavMeshAgent agent;
     private Vector3 destinationBuffer;
     [SerializeField] private GameObject waitingPositionObject;
-    [SerializeField] public WorldManager worldManager;
+    [NonSerialized] public WorldManager worldManager;
     [SerializeField] public LightManager lightManager;
 
     #endregion
@@ -47,6 +47,7 @@ public class CharacterManager : MonoBehaviour
         UnityEngine.Random.InitState((int)System.DateTime.Now.Ticks);
         _labelQueue = new Queue<string>();
         budsList = new List<CharacterManager>();
+        worldManager = GameObject.FindGameObjectWithTag("world manager").GetComponent<WorldManager>();
         explorablePlaces = new List<ExplorableObject>();
         exploredPlaces = new List<ExplorableObject>();
         containsAnObjectPlaces = new List<ExplorableObject>();
